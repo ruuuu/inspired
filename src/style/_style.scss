@@ -1,0 +1,86 @@
+// базовые стили
+html {
+      position: relative;
+      box-sizing: border-box;
+      /*система рассчетов размеров элемента*/
+}
+
+*,
+*::before,
+*::after {
+      box-sizing: inherit;
+}
+
+body {
+      min-width: 320px; // для мобилки
+      min-height: 100vh; //  высота вьюпорта
+      font-family: Arial, sans-serif;
+      background-color: $second-color;
+      color: $main-color;
+}
+
+
+img,
+svg {
+      max-width: 100%; // чтобы не выпадали за рамки блоков в которых они находятся
+      max-height: 100%;
+      height: auto; // чтобы картинка не искажалась при изменении рамзеров
+      display: block; // чтобы убрать оступ снизу, котрый ставится по умолчанию
+}
+
+
+button {
+      padding: 0;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      color: inherit;
+}
+
+a {
+      text-decoration: none;
+      color: inherit;
+}
+
+ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+fieldset {
+      margin: 0;
+}
+
+iframe {
+      border: none;
+}
+
+/*
+    Доступно скрываю элементы: элемент будет виден роботами читалками
+    */
+.visually-hidden {
+      position: fixed;
+      transform: scale(0);
+}
+
+
+/*
+    Пример контейнера
+    
+    Если контейнер 1180px по макету,
+    то для max-width прибавляем паддинги 30px*2, 
+    в итоге 1240px
+    Чтобы контент не прижимался к краям экрана
+    */
+
+.container {
+      max-width: 1240px;
+      padding: 0 30px;
+      margin: 0 auto;
+}
