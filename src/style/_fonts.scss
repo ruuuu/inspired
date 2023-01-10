@@ -1,5 +1,34 @@
-// @font-face {
-//   font-family: 'Montserrat';
-//   src: url('../fonts/montserrat-v23-latin_cyrillic-regular.woff2') format('woff2'),
-//     url('../fonts/montserrat-v23-latin_cyrillic-regular.woff') format('woff');
-// }
+/* подключение шрифтов: */
+@font-face {
+      font-family: 'Inter';
+      font-weight: 400;
+      font-style: normal;
+      src: local('Inter'),
+            /* если есть локальные шрифты */
+            url('../fonts/inter-v12-latin-regular.woff2') format("woff2"),
+            /* woff2 меньше весит чем woff */
+            url('../fonts/inter-v12-latin-regular.woff2') format("woff");
+      font-display: swap;
+}
+
+
+@font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      src: local('Inter'),
+            url('../fonts/inter-v12-latin-600.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-600.woff') format('woff');
+      font-display: swap;
+}
+
+
+@font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Inter'),
+            url('../fonts/inter-v12-latin-700.woff2') format('woff2'),
+            url('../fonts/inter-v12-latin-700.woff') format('woff');
+      font-display: swap;
+}
