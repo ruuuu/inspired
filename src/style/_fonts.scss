@@ -9,6 +9,7 @@
             /* woff2 меньше весит чем woff */
             url('../fonts/inter-v12-latin-regular.woff2') format("woff");
       font-display: swap;
+      /* чтобы сразу использовал запасной шрифт не дожидаясь ничего*/
 }
 
 

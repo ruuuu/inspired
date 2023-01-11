@@ -1,0 +1,128 @@
+.header {
+      padding: 24px 0 36px;
+
+      @include tablet {
+            padding: 16px 0;
+      }
+
+      @include mobile {
+            padding: 16px 0;
+      }
+
+
+      &__container {
+            // грид контейнер
+            display: grid;
+            grid-template-columns: repeat(1fr, 3);
+            grid-template-rows: 65px;
+            align-items: center;
+            gap: 18px;
+
+
+            @include tablet {
+                  grid-template-rows: 41px;
+            }
+
+            @include mobile {}
+      }
+
+
+      &__phone {
+            // грид элемент
+            width: 115px;
+            grid-column: 1/2;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            text-transform: uppercase;
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__logo {
+            // грид элемент
+            grid-column: 2/3;
+            justify-self: center; // выравнивает по гризонтали
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__navigation {
+            // грид элемент
+            grid-column: 3/4;
+            justify-self: end; // выравнивает по гризонтали
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__nav-list {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header__nav-item {}
+
+
+@media(max-width: 1024px) {
+
+
+      .header__container {
+            gap: 200px;
+      }
+
+      .header__link {}
+
+      .header__phone {
+            width: 115px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+      }
+
+      .header__logo {}
+
+      .header__navigation {}
+
+      .header__nav-list {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+      }
+
+      .header__nav-item {}
+
+}

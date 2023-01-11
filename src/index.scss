@@ -1,4 +1,6 @@
 @import '~normalize.css';
-@import 'style/fonts';
+@import 'style/fonts'; // поключили fonts.scss
 @import 'style/var';
 @import 'style/style';
+@import 'style/header';
+@import 'style/gender';
