@@ -1,0 +1,46 @@
+.gender {
+
+      display: flex;
+      gap: 20px;
+
+      @include laptop {}
+
+      @include tablet {}
+
+      @include mobile {}
+
+
+      &__item {
+            flex-basis: 50%;
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__link {
+            // a
+            display: block;
+            text-align: center;
+            padding: 16px 0;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            text-transform: uppercase;
+            border-bottom: 2px solid $light-gray;
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__link--active {
+            border-color: $main-color;
+      }
+}

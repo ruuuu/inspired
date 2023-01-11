@@ -1,0 +1,28 @@
+.category {
+
+      @include laptop {}
+
+      @include tablet {}
+
+      @include mobile {}
+
+
+      &__item {
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__link {
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+}

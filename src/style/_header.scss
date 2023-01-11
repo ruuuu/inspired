@@ -16,14 +16,16 @@
             grid-template-columns: repeat(1fr, 3);
             grid-template-rows: 65px;
             align-items: center;
-            gap: 18px;
 
 
             @include tablet {
                   grid-template-rows: 41px;
             }
 
-            @include mobile {}
+            @include mobile {
+                  grid-template-columns: repeat(1fr, 2);
+                  grid-template-rows: 33px;
+            }
       }
 
 
@@ -36,9 +38,14 @@
             line-height: 17px;
             text-transform: uppercase;
 
-            @include tablet {}
+            @include tablet {
+                  font-size: 12px;
+                  line-height: 15px;
+            }
 
-            @include mobile {}
+            @include mobile {
+                  display: none;
+            }
       }
 
 
@@ -47,15 +54,23 @@
             grid-column: 2/3;
             justify-self: center; // выравнивает по гризонтали
 
-            @include tablet {}
+            @include tablet {
+                  width: 154px;
+                  height: 41px;
+            }
 
-            @include mobile {}
+            @include mobile {
+                  grid-column: 1/2;
+                  justify-self: start;
+                  width: 124px;
+                  height: 33px;
+            }
       }
 
 
       &__navigation {
             // грид элемент
-            grid-column: 3/4;
+            grid-column: 4/5;
             justify-self: end; // выравнивает по гризонтали
 
             @include tablet {}
@@ -69,60 +84,34 @@
             align-items: center;
             gap: 24px;
 
+            @include tablet {
+                  grid-column: 3/4;
+            }
+
+            @include mobile {
+                  gap: 16px;
+            }
+      }
+
+
+      &__nav-item {
+
             @include tablet {}
 
             @include mobile {}
       }
 
 
-}
+      &__link {
+            transition: color 0.3s ease-in-out; // цвет пир наведении будет плавно меняться
 
+            &:hover {
+                  color: $gray;
+            }
 
+            @include tablet {}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.header__nav-item {}
-
-
-@media(max-width: 1024px) {
-
-
-      .header__container {
-            gap: 200px;
+            @include mobile {}
       }
-
-      .header__link {}
-
-      .header__phone {
-            width: 115px;
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 17px;
-      }
-
-      .header__logo {}
-
-      .header__navigation {}
-
-      .header__nav-list {
-            display: flex;
-            align-items: baseline;
-            gap: 24px;
-      }
-
-      .header__nav-item {}
 
 }
