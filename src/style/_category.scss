@@ -1,10 +1,24 @@
 .category {
+      max-width: 692px;
+      display: flex;
+      column-gap: 51px;
+      row-gap: 20px;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      padding: 24px 0 12px;
+
+
 
       @include laptop {}
 
-      @include tablet {}
+      @include tablet {
+            padding: 16px 0 5px;
+      }
 
-      @include mobile {}
+      @include mobile {
+            row-gap: 10px;
+            column-gap: 31px;
+      }
 
 
       &__item {
@@ -18,11 +32,52 @@
 
 
       &__link {
+            position: relative;
+            font-size: 14px;
+            line-height: 17px;
+            text-transform: uppercase;
+
+            &::after {
+                  // псевдоэлемент-нижняя гор черта под ссылкой
+                  content: '';
+                  position: absolute;
+                  bottom: -10px;
+                  left: 50%; // эти два совйства центруют 
+                  transform: translateX(-50%);
+                  width: 26px;
+                  height: 2px;
+                  background-color: $main-color;
+                  opacity: 0; // скрываем эелмент
+            }
+
+            &--active {
+                  // активнй элемент
+                  pointer-events: none; // неактивный
+
+                  &::after {
+                        opacity: 1; // делаем элемент видимым
+                  }
+            }
 
             @include laptop {}
 
-            @include tablet {}
+            @include tablet {
+                  font-size: 12px;
+                  line-height: 15px;
 
-            @include mobile {}
+                  &::after {
+                        // псевдоэлемент-нижняя гор черта под ссылкой
+
+                        bottom: -5px;
+                        width: 20px;
+                        height: 1px;
+                  }
+
+            }
+
+            @include mobile {
+                  font-size: 10px;
+                  line-height: 12px;
+            }
       }
 }

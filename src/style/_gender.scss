@@ -31,12 +31,24 @@
             line-height: 22px;
             text-transform: uppercase;
             border-bottom: 2px solid $light-gray;
+            transition: color 0.3s ease-in-out;
+
+            &:hover {
+                  color: $gray;
+            }
+
 
             @include laptop {}
 
-            @include tablet {}
+            @include tablet {
+                  font-size: 16px;
+                  line-height: 19px;
+            }
 
-            @include mobile {}
+            @include mobile {
+                  font-size: 14px;
+                  line-height: 17px;
+            }
       }
 
 

@@ -1,0 +1,67 @@
+.hero {
+      background-image: url("../img/banner-women.jpg");
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: cover;
+
+      background-color: $dark-gray;
+      color: $second-color;
+
+      @include tablet {}
+
+      @include mobile {}
+
+      &__women {
+            margin-bottom: 80px;
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+      &__container {
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+      &__content {
+
+            padding-top: 172px;
+            padding-left: 130px;
+            padding-bottom: 172px;
+            padding-right: 30px;
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+      &__title {
+            max-width: 590px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            font-size: 44px;
+            line-height: 120%;
+
+            text-transform: uppercase;
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+      &__link {
+            padding: 14px 41px;
+            border: 1px solid $second-color;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+            text-transform: uppercase;
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+}
