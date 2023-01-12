@@ -1,11 +1,74 @@
 .goods {
 
-      &__container {}
 
-      &__title {}
+      @include laptop {}
 
-      &__list {}
+      @include tablet {}
 
-      &__item {}
+      @include mobile {}
+
+
+      &__container {
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__title {
+            text-align: center;
+            padding-bottom: 24px;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 39px;
+            text-transform: uppercase;
+            border-bottom: 1px solid $light-gray;
+
+            @include laptop {}
+
+            @include tablet {
+                  font-size: 24px;
+                  line-height: 29px;
+                  padding-bottom: 16px;
+            }
+
+            @include mobile {
+                  font-size: 18px;
+                  line-height: 22px;
+            }
+      }
+
+
+      &__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 280px);
+            justify-content: space-evenly;
+            column-gap: 20px;
+            row-gap: 40px;
+            padding-top: 40px;
+            padding-bottom: 120px;
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__item {
+            width: 280px;
+            min-height: 487px;
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
 
 }

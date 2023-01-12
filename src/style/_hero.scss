@@ -1,23 +1,57 @@
 .hero {
-      background-image: url("../img/banner-women.jpg");
       background-repeat: no-repeat;
       background-position: top center;
       background-size: cover;
-
+      margin-bottom: 80px;
       background-color: $dark-gray;
       color: $second-color;
 
-      @include tablet {}
+      @include tablet {
+            margin-bottom: 64px;
+      }
 
-      @include mobile {}
+      @include mobile {
+            margin-bottom: 16px;
+      }
+
 
       &__women {
-            margin-bottom: 80px;
+            background-image: url("../img/women-main.jpg");
 
-            @include tablet {}
+            @include laptop {
+                  background-image: url("../img/women-laptop.jpg");
 
-            @include mobile {}
+            }
+
+            @include tablet {
+                  background-image: url("../img/women-tablet.jpg");
+
+            }
+
+            @include mobile {
+                  background-image: url("../img/women-mobile.jpg");
+
+            }
       }
+
+
+      &__men {
+            background-image: url("../img/men-main.jpg");
+
+            @include laptop {
+                  background-image: url("../img/men-laptop.jpg");
+
+            }
+
+            @include tablet {
+                  background-image: url("../img/men-tablet.jpg");
+            }
+
+            @include mobile {
+                  background-image: url("../img/men-mobile.jpg");
+            }
+      }
+
 
       &__container {
 
@@ -26,41 +60,74 @@
             @include mobile {}
       }
 
-      &__content {
 
+      &__content {
+            max-width: 590px;
             padding-top: 172px;
             padding-left: 130px;
             padding-bottom: 172px;
             padding-right: 30px;
 
-            @include tablet {}
+            @include tablet {
+                  max-width: 502px;
+                  padding-top: 156px;
+                  padding-left: 72px;
+                  padding-bottom: 110px;
+            }
 
-            @include mobile {}
+            @include mobile {
+                  max-width: 290px;
+                  padding-top: 76px;
+                  padding-left: 15px;
+                  padding-bottom: 24px;
+            }
       }
 
+
       &__title {
-            max-width: 590px;
             margin-bottom: 40px;
             font-weight: 400;
             font-size: 44px;
             line-height: 120%;
-
             text-transform: uppercase;
 
-            @include tablet {}
+            @include tablet {
+                  margin-bottom: 24px;
+                  font-weight: 400;
+                  font-size: 30px;
+                  line-height: 120%;
+            }
 
-            @include mobile {}
+            @include mobile {
+                  margin-bottom: 16px;
+                  font-size: 20px;
+                  line-height: 120%;
+
+            }
       }
 
+
       &__link {
+            display: inline-block;
             padding: 14px 41px;
             border: 1px solid $second-color;
             font-weight: 700;
             font-size: 14px;
             line-height: 17px;
             text-transform: uppercase;
+            transition: background-color border-color 0.3s ease-in-out; // цвет меняется плавно через 0.3s
 
-            @include tablet {}
+            &:hover {
+                  background-color: $dark-gray;
+                  border-color: $dark-gray;
+
+            }
+
+            @include tablet {
+                  padding: 12px 41px;
+                  font-size: 10px;
+                  line-height: 12px;
+            }
 
             @include mobile {}
       }

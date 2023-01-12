@@ -1,10 +1,42 @@
 .product {
 
-      &__link {}
+      @include laptop {}
 
-      &__image {}
+      @include tablet {}
 
-      &__title {}
+      @include mobile {}
+
+
+      &__link {
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__image {
+            width: 280px;
+            height: 370px;
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
+
+
+      &__title {
+
+            @include laptop {}
+
+            @include tablet {}
+
+            @include mobile {}
+      }
 
       &__row {}
 
