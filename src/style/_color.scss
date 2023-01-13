@@ -1,25 +1,36 @@
 .color {
-
-      width: 12px;
-      height: 12px;
+      position: relative; // большой круг, отноисльно этого элемента будем бьшой круг делать
+      width: 18px;
+      height: 18px;
       border: 1px solid $light-gray;
       border-radius: 50%;
 
-      &--red {
+
+      &--check {
+            border: 0.4px solid #929292;
+      }
+
+      &:after {
+            // псевдоэлемент-маленький круг(котрый внутри большого) 
+            content: ''; // attr() будем использовать дата-атрибут
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); // свойства top left transform центруют круг
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+      }
+
+      &--red:after {
             background-color: red;
       }
 
-      &--check {
-            width: 18px;
-            height: 18px;
-
-      }
-
-      &--white {
+      &--white:after {
             background-color: white;
       }
 
-      &--black {
+      &--black:after {
             background-color: black;
       }
 }
