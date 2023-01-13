@@ -1,59 +1,146 @@
 .footer {
 
+      &__container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-areas:
+                  'category social contacts'
+                  'copyright  .   development'
+            ;
+            gap: 26px 20px;
+            padding-top: 51px;
+            padding-bottom: 24px;
+            border-top: 1px solid $light-gray;
+
+            @include laptop {
+                  padding-top: 31px;
+                  grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            @include tablet {
+                  padding-top: 25px;
+                  padding-bottom: 16px;
+                  grid-template-columns: 1fr 2fr 1fr;
+                  row-gap: 17px;
+            }
+
+            @include mobile {
+                  gap: 10px;
+                  grid-template-columns: 1fr max-content; // 2-ой столюец занимет всю оставшуюся часть
+                  grid-template-areas:
+                        'category social'
+                        'contacts contacts'
+                        'development development'
+                        'copyright copyright'
+                  ;
+                  padding-top: 17px;
+            }
+
+      }
 
 
-      &__container {}
+      &__item {
+            &--catogory {
+                  // грид элемент
+                  grid-area: category;
+            }
 
-      &__item {}
+            &--social {
+                  // грид элемент
+                  grid-area: social;
+                  justify-self: center;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 16px;
 
-      &__item--catogory {}
 
-      &-category {}
+                  @include laptop {}
 
-      &__title {}
+                  @include tablet {}
 
-      &-category__title {}
+                  @include mobile {}
+            }
 
-      .footer-category__list {}
+            &--contacts {
+                  // грид элемент
+                  grid-area: contacts;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 16px;
+                  font-size: 18px;
+                  line-height: 22px;
 
-      .footer-category__item {}
 
-      .footer-category__subtitle {}
+                  @include laptop {}
 
-      .footer-category__sublist {}
+                  @include tablet {
+                        font-size: 14px;
+                        line-height: 17px;
+                  }
 
-      .footer-category__subitem {}
+                  @include mobile {}
+            }
 
-      .footer__link {}
+            &--copyright {
+                  // грид элемент
+                  grid-area: copyright;
+                  align-self: end;
+                  font-size: 12px;
+                  line-height: 130%;
 
-      .footer__item--social {}
+                  @include tablet {
+                        font-size: 10px;
+                  }
+            }
 
-      .footer-social {}
+            &--development {
+                  // грид элемент
+                  grid-area: development;
+            }
 
-      .footer-social__title {}
+      }
 
-      .footer-social__subtitle {}
 
-      .footer-social__list {}
+      &__title {
+            margin-bottom: 24px;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            text-transform: uppercase;
 
-      .footer-social__item {}
+            @include tablet {
+                  font-size: 16px;
+                  line-height: 19px;
+            }
 
-      .footer-social__link {}
+            @include mobile {
+                  font-size: 14px;
+                  line-height: 17px;
+            }
+      }
 
-      .footer__item--contacts {}
 
-      .footer-contacts {}
+      &__link {
+            transition: color 0.3s ease-in-out;
 
-      .footer__item--copyright {}
+            &:hover {
+                  color: $gray;
+            }
+      }
 
-      .footer-copyright {}
 
-      .footer__item--development {}
 
-      .footer-development {}
 
-      .footer-development__list {}
 
-      .footer-development__item {}
+
+
+
+
+
+
+
+
+
+
 
 }

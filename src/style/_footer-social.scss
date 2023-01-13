@@ -1,0 +1,32 @@
+.footer-social {
+
+      &__title {}
+
+      &__subtitle {
+
+            @include tablet {
+                  font-size: 12px;
+                  line-height: 15px;
+            }
+      }
+
+
+      &__list {
+            display: flex;
+            gap: 10px;
+      }
+
+
+      &__item {}
+
+
+      &__link {}
+
+      &__link--fb:hover {
+            color: blue;
+      }
+
+      &__link--vk:hover {
+            color: green;
+      }
+}
