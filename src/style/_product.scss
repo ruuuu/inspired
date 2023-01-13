@@ -1,8 +1,14 @@
 .product {
 
+      font-size: 14px;
+      line-height: 17px;
+
       @include laptop {}
 
-      @include tablet {}
+      @include tablet {
+            font-size: 12px;
+            line-height: 15px;
+      }
 
       @include mobile {}
 
@@ -20,31 +26,63 @@
       &__image {
             width: 280px;
             height: 370px;
+            margin-bottom: 16px;
 
             @include laptop {}
 
-            @include tablet {}
+            @include tablet {
+                  width: 140px;
+                  height: 185px;
+            }
 
             @include mobile {}
       }
 
 
       &__title {
+            margin-bottom: 16px;
 
             @include laptop {}
 
-            @include tablet {}
+            @include tablet {
+                  margin-bottom: 10px;
+            }
 
             @include mobile {}
       }
 
-      &__row {}
+      &__row {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-      &__price {}
+            @include tablet {
+                  margin-bottom: 7px;
+            }
 
-      &__btn-favorite {}
+            @include mobile {}
 
-      &__color-list {}
+      }
+
+
+      &__price {
+            font-size: 14px;
+            line-height: 17px;
+      }
+
+      &__btn-favorite {
+            background-image: url("../img/Heart.svg");
+            background-size: 24px 24px;
+            background-repeat: no-repeat;
+            background-position: center;
+      }
+
+      &__color-list {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+      }
 
       &__color-item {}
 }

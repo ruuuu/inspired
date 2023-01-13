@@ -44,28 +44,40 @@
 
       &__list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, 280px);
+            grid-template-columns: repeat(auto-fill, 280px); // число колонок будет зависеть от ширины контенйера
             justify-content: space-evenly;
             column-gap: 20px;
             row-gap: 40px;
             padding-top: 40px;
-            padding-bottom: 120px;
+
 
             @include laptop {}
 
-            @include tablet {}
+            @include tablet {
+                  grid-template-columns: repeat(auto-fill, 140px);
+                  row-gap: 24px;
+            }
 
-            @include mobile {}
+            @include mobile {
+                  padding-top: 16px;
+                  column-gap: 10px;
+                  row-gap: 16px;
+            }
       }
 
 
       &__item {
             width: 280px;
             min-height: 487px;
+            display: flex;
+            flex-direction: column;
 
             @include laptop {}
 
-            @include tablet {}
+            @include tablet {
+                  width: 140px;
+                  min-height: 275px;
+            }
 
             @include mobile {}
       }

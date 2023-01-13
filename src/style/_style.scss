@@ -71,6 +71,21 @@ iframe {
       transform: scale(0);
 }
 
+.main {
+      margin-bottom: 120px;
+
+      @include laptop {}
+
+      @include tablet {
+            margin-bottom: 80px;
+      }
+
+
+      @include mobile {
+            margin-bottom: 60px;
+      }
+
+}
 
 /*
     Пример контейнера
