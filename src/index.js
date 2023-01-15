@@ -8,36 +8,38 @@ import { womenMainPage } from './modules/mainPage/womenMainPage';
 import { menMainPage } from './modules/mainPage/menMainPage';
 
 
-router.on('*', () => {   // навешиваем событие: если находимс яна любой стрнаице, вызовется переданная  функция 
-      renderHeader();
-      renderFooter();
+router.on('*', () => {   // навешиваем событие: если находимся на любой стрнаице, вызовется переданная  функция 
+   renderHeader();
+   renderFooter();
 });
 
 
 router.on('/', () => {   // если находимся на главной станице 
-      mainPage();
+   mainPage();
 });
 
 
-router.on('women', () => {          // если находимся на  станице http://localhost:3000/#women
-      womenMainPage();
+router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women
+   womenMainPage();
 });
 
 
-router.on('men', () => {             // если находимся на  станице http://localhost:3000/#men
-      menMainPage();
+router.on('men', () => {             // если находимся на  станице http://localhost:3000/#/men
+   menMainPage();
 });
 
 
 // setTimeout(() => {
-//       router.navigate('men');        // переходим на страницу http://localhost:3000/#men через 3000ms(3с). Переданная фукнция выполнится через 3с
+//       router.navigate('men');        // переходим на страницу http://localhost:3000/#/men через 3000ms(3с). Переданная фукнция выполнится через 3с
 // }, 3000);
 
 
 // setTimeout(() => {
-//       router.navigate('women');       // переходим на страницу http://localhost:3000/#women  через 6 с
+//       router.navigate('women');       // переходим на страницу http://localhost:3000/#/women  через 6 с
 // }, 6000);
 
+
+router.resolve();                         //  активируем роутинг
 
 
 // роутинг - переход по страницам без перезагрузки страницы  и  без лишней подгрузки html css. Для роутинга используем библиотеку navigo https://www.npmjs.com/package/navigo

@@ -1,8 +1,8 @@
 export const renderFooter = () => {
 
-      const footer = document.querySelector('.footer');
+   const footer = document.querySelector('.footer');
 
-      footer.innerHTML = `
+   footer.innerHTML = `
       <div class="container">
       <div class="footer__container"><!--грид контенйер-->
         <!--грид элемент-->

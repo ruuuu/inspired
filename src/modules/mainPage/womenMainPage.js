@@ -1,7 +1,7 @@
 import { mainPage } from "./mainPage";
 
 
-export const menMainPage = () => {
+export const womenMainPage = () => {
       mainPage('women');
 
 }
