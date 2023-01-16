@@ -5,9 +5,9 @@ import logo from "../../img/logo.svg";
 
 // кнпока поиска в шапке:
 export const searchButton = createElement('button',
-   {
-      className: 'header__link',
-      innerHTML: ` 
+    {
+        className: 'header__link',
+        innerHTML: ` 
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -17,16 +17,16 @@ export const searchButton = createElement('button',
                               stroke-linejoin="round" />
                   </svg>
             `
-   }
+    }
 );
 
 
 
 // иконка Корзины в шапке:
 export const cartLink = createElement('a',
-   {
-      className: 'header__link',
-      innerHTML: ` 
+    {
+        className: 'header__link',
+        innerHTML: ` 
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -37,17 +37,17 @@ export const cartLink = createElement('a',
                               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
             `,
-      href: 'cart'
-   }
+        href: 'cart'
+    }
 );
 
 
 
 // иконка Сердечка в шапке:
 export const favoriteLink = createElement('a',
-   {
-      className: 'header__link',
-      innerHTML: ` 
+    {
+        className: 'header__link',
+        innerHTML: ` 
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -55,70 +55,67 @@ export const favoriteLink = createElement('a',
                               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
             `,
-      href: 'favorite'
-   }
+        href: 'favorite'
+    }
 );
 
 
 
 const container = createElement('div',
-   {
-      className: 'container header__container',
-      innerHTML: `
+    {
+        className: 'container header__container',
+        innerHTML: `
                   <a class="header__link header__phone" href="tel:89304902620">8 930 490 26 20</a>
                   <img class="header__logo" src="${logo}" alt="Логотип Inspired - магазин нижнего белья">
             `
-   }
+    }
 );
 
 
 
 export const nav = createElement('div',
-   {
-      className: 'header__navigation'
-   },
-   {
-      parent: container            //  container родитель для nav
-   }
+    {
+        className: 'header__navigation'
+    },
+    {
+        parent: container            //  container родитель для nav
+    }
 );
 
 
 
 createElement('ul',
-   {
-      className: 'header__nav-list',
-   },
-   {
-      parent: nav,            //  nav  родитель для ul
-      appends: [              //  li вхдит в ul
-         createElement('li',
-            {
-               className: 'header__nav-item'
-            },
-            {
-               append: searchButton  // searchButton всатвляется в li.header__nav-item
-            }
-         ),
+    {
+        className: 'header__nav-list',
+    },
+    {
+        parent: nav,
+        appends: [              //  li вхдит в ul
+            createElement('li',
+                {
+                    className: 'header__nav-item'
+                },
+                {
+                    append: searchButton
+                }),
 
-         createElement('li',
-            {
-               className: 'header__nav-item'
-            },
-            {
-               append: cartLink
-            }
-         ),
+            createElement('li',
+                {
+                    className: 'header__nav-item'
+                },
+                {
+                    append: cartLink
+                }),
 
-         createElement('li',
-            {
-               className: 'header__nav-item'
-            },
-            {
-               append: favoriteLink
-            }
-         )
-      ]
-   }
+            createElement('li',
+                {
+                    className: 'header__nav-item'
+                },
+                {
+                    append: favoriteLink
+                })
+        ]
+    }
 );
 
 
@@ -128,7 +125,7 @@ createElement('ul',
 
 export const renderHeader = () => {
 
-   const header = document.querySelector('.header');
-   header.append(container);
+    const header = document.querySelector('.header');
+    header.append(container);
 }
 

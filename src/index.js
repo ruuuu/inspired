@@ -9,23 +9,23 @@ import { menMainPage } from './modules/mainPage/menMainPage';
 
 
 router.on('*', () => {   // навешиваем событие: если находимся на любой стрнаице, вызовется переданная  функция 
-   renderHeader();
-   renderFooter();
+    renderHeader();
+    renderFooter();
 });
 
 
 router.on('/', () => {   // если находимся на главной станице 
-   mainPage();
+    mainPage();
 });
 
 
 router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)
-   womenMainPage();
+    womenMainPage();
 });
 
 
 router.on('men', () => {             // если находимся на  станице http://localhost:3000/#/men
-   menMainPage();
+    menMainPage();
 });
 
 
