@@ -4,7 +4,7 @@ import { renderProducts } from "../render/renderProducts"
 
 
 
-export const mainPage = (gender = 'women') => {
+export const mainPage = (gender = 'women') => {                //  по умлчанию передаем women
    console.log('gender ', gender);
 
    renderNavigation(gender);
