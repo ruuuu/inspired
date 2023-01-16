@@ -4,7 +4,7 @@ import { dataNavigation } from "../dataNavigation";       // импортиру�
 
 
 
-export const renderNavigation = () => {
+export const renderNavigation = (gender) => {
 
    const navigation = document.querySelector('.navigation');
 
@@ -32,31 +32,68 @@ export const renderNavigation = () => {
    );
 
 
-   for (const genderName in dataNavigation) {      // genderName = men/women
+   for (const genderName in dataNavigation) {      // genderName = women/men
       createElement('a',
          {
-            className: 'category__link'
+            className: `gender__link ${gender === genderName ? 'gender__link--active' : ''}`,
+            href: `#/${genderName}`,
+            textContent: dataNavigation[genderName].title
+         },
+         {
+            parent: createElement('li',
+               {
+                  className: 'gender__item'
+               },
+               {
+                  parent: genderList
+               }
+            )
+         }
+      );
+   };
+
+
+   const categoryElems = dataNavigation[gender].list.map((item) => {       // dataNavigation[gender].list = [{},{},{}], map перебирает массив и возвращает новый
+      console.log('item ', item);
+      const li = createElement('li',
+         {
+            className: 'category__item',
+         },
+         {
+            append: createElement('a',
+               {
+                  className: 'category__link',
+                  textContent: item.title,
+                  href: `#/${gender}/${item.slug}`
+               },
+               {
+                  cb(elem) {
+                     elem.addEventListener('click', () => {
+                        document
+                           .querySelector('.category__link--active')
+                           ?.classList.remove('category__link--active');
+
+                        elem.classList.add('category__link--active');
+                     });
+                  }
+               }
+            )
          }
       );
 
-      // genderName.list.forEach(element => {
-      //    createElement('')
-      //    a.textContent = element.title;
-      // });
-
-   }
-
-
+      return li; // взаращает элемент и кладет его в массив categoryElems
+   });
 
 
 
    //ul
-   const categoryList = createElement('ul',
+   createElement('ul',
       {
          className: 'navigation__category category'
       },
       {
-         parent: container
+         parent: container,
+         appends: categoryElems     // [li.a, li.a, li.a ]
       }
    );
 

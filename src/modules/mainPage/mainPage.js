@@ -4,12 +4,12 @@ import { renderProducts } from "../render/renderProducts"
 
 
 
-export const mainPage = (gender) => {
-      console.log('gender ', gender);
+export const mainPage = (gender = 'women') => {
+   console.log('gender ', gender);
 
-      renderNavigation();
+   renderNavigation(gender);
 
-      renderHero();
+   renderHero(gender);
 
-      renderProducts();
+   renderProducts(gender);
 }
