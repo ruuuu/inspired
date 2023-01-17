@@ -1,7 +1,7 @@
-// отрисовка меню:
+// отрисовка меню в шапке:
 import { createElement } from "../createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
-
+import { DATA } from "../const";
 
 
 export const renderNavigation = (gender) => {
@@ -34,7 +34,8 @@ export const renderNavigation = (gender) => {
 
 
 
-    for (const genderName in dataNavigation) {      // genderName = women/men
+    for (const genderName in dataNavigation) {      // genderName = women/men. DATA.navigation = { women: {title: , list: },  men: {title: , list: }   }
+        //console.log('DATA.navigation in for ', DATA.navigation);
         createElement('a',
             {
                 className: `gender__link ${gender === genderName ? 'gender__link--active' : ''}`,
@@ -42,13 +43,7 @@ export const renderNavigation = (gender) => {
                 textContent: dataNavigation[genderName].title
             },
             {
-                parent: createElement('li',
-                    {
-                        className: 'gender__item'
-                    },
-                    {
-                        parent: genderList
-                    })
+                parent: createElement('li', { className: 'gender__item' }, { parent: genderList })
             }
         );
     };
@@ -57,7 +52,7 @@ export const renderNavigation = (gender) => {
 
 
     const categoryElems = dataNavigation[gender].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
-        console.log('item ', item);
+        // console.log('item ', item);
         const li = createElement('li',
             {
                 className: 'category__item',

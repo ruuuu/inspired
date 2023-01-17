@@ -66,7 +66,9 @@ const container = createElement('div',
         className: 'container header__container',
         innerHTML: `
                   <a class="header__link header__phone" href="tel:89304902620">8 930 490 26 20</a>
-                  <img class="header__logo" src="${logo}" alt="Логотип Inspired - магазин нижнего белья">
+                  <a> 
+                    <img class="header__logo" src="${logo}" alt="Логотип Inspired - магазин нижнего белья">
+                  </a>  
             `
     }
 );

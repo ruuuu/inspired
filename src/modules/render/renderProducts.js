@@ -1,8 +1,9 @@
+
 export const renderProducts = () => {
 
-      const products = document.querySelector('.goods');
+    const products = document.querySelector('.goods');
 
-      products.innerHTML = `
+    products.innerHTML = `
       <div class="container goods__container">
         <h2 class="goods__title">Новинки</h2>
 

@@ -14,5 +14,5 @@ export const mainPage = (gender = 'women') => {                //  по умлч
 
     renderProducts(gender);
 
-    renderFooter(gender);
+    renderFooter();
 }

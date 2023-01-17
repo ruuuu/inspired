@@ -30,8 +30,6 @@ export const renderFooter = () => {               // gender = women/men
 
 
 
-
-
     const footerCategory = createElement('div',
         {
             className: 'footer__item footer__item--catogory footer-category'
@@ -53,7 +51,7 @@ export const renderFooter = () => {               // gender = women/men
     );
 
 
-    const ul = createElement('ul',
+    const footerCategoryList = createElement('ul',
         {
             className: 'footer-category__list'
         },
@@ -65,78 +63,13 @@ export const renderFooter = () => {               // gender = women/men
 
 
 
-    //-------------------------------------
-    const categoryElemsMen = dataNavigation['men'].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
-
-        const li = createElement('li',
-            {
-                className: 'footer-category__subitem',
-            },
-            {
-                append: createElement('a',
-                    {
-                        className: 'footer__link',
-                        textContent: item.title,
-                        href: `#` // /${gender}/${item.slug}
-                    })
-            }
-        );
-
-        return li; // взаращает элемент и кладет его в массив categoryElemsMen
-    });
-
-
-
-
-    const categoryElemsWomen = dataNavigation['women'].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
-
-        const li = createElement('li',
-            {
-                className: 'footer-category__subitem',
-            },
-            {
-                append: createElement('a',
-                    {
-                        className: 'footer__link',
-                        textContent: item.title,
-                        href: `#` // /${gender}/${item.slug}
-                    })
-            }
-        );
-
-        return li;
-    });
-
-
-
-
-
-    const categoryElemsWoMen = dataNavigation['women'].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
-
-        const li = createElement('li',
-            {
-                className: 'footer-category__subitem',
-            },
-            {
-                append: createElement('a',
-                    {
-                        className: 'footer__link',
-                        textContent: item.title,
-                        href: `#` // /${gender}/${item.slug}
-                    })
-            }
-        );
-
-        return li;
-    });
-
-
-
 
 
     for (const genderName in dataNavigation) {      // genderName = women/men
 
-        const xx = createElement('li', { className: 'footer-category__item' }, { parent: ul });
+        const footerCategoryItem = createElement('li', { className: 'footer-category__item' }, { parent: footerCategoryList });
+        const h3 = createElement('h3', { className: 'footer-category__subtitle' }, { parent: footerCategoryItem });
+
         const a = createElement('a',
             {
                 className: 'footer__link',
@@ -144,21 +77,24 @@ export const renderFooter = () => {               // gender = women/men
                 textContent: dataNavigation[genderName].title
             },
             {
-                parent: createElement('h3', { className: 'footer-category__subtitle' }, { parent: xx })
+                parent: h3
             }
         );
-        //console.log('a ', a);
 
-        const ulSubListWomen = createElement('ul', { className: 'footer-category__sublist' }, { appends: categoryElemsMen, parent: xx });
-
-        const ulSubListMen = createElement('ul', { className: 'footer-category__sublist' }, { appends: categoryElemsWoMen, parent: xx });
-        // console.log('ulSubList ', ulSubList);
+        const subList = createElement('ul', { className: 'footer-category__sublist' }, { parent: footerCategoryItem });
 
 
+
+        for (let i = 0; i < dataNavigation[genderName].list.length; i++) {
+            const footerCategorySubitem = createElement('li', { className: 'footer-category__subitem' }, { parent: subList });
+            console.log('dataNavigation[genderName].list[i] ', dataNavigation[genderName].list[i])
+            createElement('a', { className: 'footer__link', textContent: dataNavigation[genderName].list[i].title }, { parent: footerCategorySubitem });
+        }
 
     };
 
-    //-------------------------------------
+
+
 
 
     const footerSocial = createElement('div',
@@ -332,9 +268,7 @@ export const renderFooter = () => {               // gender = women/men
     //          </li>
     //        </ul>
     //      </div>
-
-
-    //  продолжение:
+    //
     //      <!--грид элемент-->
     //      <div class="footer__item footer__item--social footer-social">  +
     //        <h2 class="footer__title footer-social__title">Связаться с нами</h2> +
