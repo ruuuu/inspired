@@ -1,6 +1,6 @@
 import { createElement } from "../createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
-
+import { DATA } from "../const";
 
 
 export const renderFooter = () => {               // gender = women/men
@@ -65,7 +65,7 @@ export const renderFooter = () => {               // gender = women/men
 
 
 
-    for (const genderName in dataNavigation) {      // genderName = women/men
+    for (const genderName in DATA.navigation) {      // genderName = women/men
 
         const footerCategoryItem = createElement('li', { className: 'footer-category__item' }, { parent: footerCategoryList });
         const h3 = createElement('h3', { className: 'footer-category__subtitle' }, { parent: footerCategoryItem });
@@ -74,21 +74,17 @@ export const renderFooter = () => {               // gender = women/men
             {
                 className: 'footer__link',
                 href: `#/${genderName}`,
-                textContent: dataNavigation[genderName].title
+                textContent: DATA.navigation[genderName].title
             },
             {
                 parent: h3
-            }
-        );
+            });
 
         const subList = createElement('ul', { className: 'footer-category__sublist' }, { parent: footerCategoryItem });
 
-
-
-        for (let i = 0; i < dataNavigation[genderName].list.length; i++) {
+        for (let i = 0; i < DATA.navigation[genderName].list.length; i++) {
             const footerCategorySubitem = createElement('li', { className: 'footer-category__subitem' }, { parent: subList });
-            console.log('dataNavigation[genderName].list[i] ', dataNavigation[genderName].list[i])
-            createElement('a', { className: 'footer__link', textContent: dataNavigation[genderName].list[i].title }, { parent: footerCategorySubitem });
+            createElement('a', { className: 'footer__link', textContent: DATA.navigation[genderName].list[i].title }, { parent: footerCategorySubitem });
         }
 
     };

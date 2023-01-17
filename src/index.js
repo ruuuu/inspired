@@ -12,8 +12,8 @@ import { API_URL, DATA } from './modules/const';
 
 
 const init = async () => {
-    // DATA.navigation = await getData(`${API_URL}/api/categories`);
-    // console.log('DATA.navigation in init', DATA.navigation);
+    DATA.navigation = await getData(`${API_URL}/api/categories`);           // добавили объекту  свойство navigation
+    console.log('DATA.navigation in init', DATA.navigation);
 
     router.on('*', () => {   // навешиваем событие: если находимся на любой стрнаице, вызовется переданная  функция 
         renderHeader();

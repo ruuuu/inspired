@@ -34,13 +34,13 @@ export const renderNavigation = (gender) => {
 
 
 
-    for (const genderName in dataNavigation) {      // genderName = women/men. DATA.navigation = { women: {title: , list: },  men: {title: , list: }   }
-        //console.log('DATA.navigation in for ', DATA.navigation);
+    for (const genderName in DATA.navigation) {      // genderName = women/men. DATA.navigation = { women: {title: , list: },  men: {title: , list: }   }
+        console.log('DATA.navigation in for ', DATA.navigation);
         createElement('a',
             {
                 className: `gender__link ${gender === genderName ? 'gender__link--active' : ''}`,
                 href: `#/${genderName}`,
-                textContent: dataNavigation[genderName].title
+                textContent: DATA.navigation[genderName].title
             },
             {
                 parent: createElement('li', { className: 'gender__item' }, { parent: genderList })
@@ -51,7 +51,7 @@ export const renderNavigation = (gender) => {
 
 
 
-    const categoryElems = dataNavigation[gender].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
+    const categoryElems = DATA.navigation[gender].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
         // console.log('item ', item);
         const li = createElement('li',
             {

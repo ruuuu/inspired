@@ -26,7 +26,7 @@ export const getData = async (urlApi, param, cbError = () => { }) => {          
 
         console.log('data ', data);
 
-        return {};
+        return data;
     }
     catch (err) {
         console.warn(err);
