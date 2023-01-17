@@ -64,15 +64,21 @@ export const favoriteLink = createElement('a',
 const container = createElement('div',
     {
         className: 'container header__container',
-        innerHTML: `
-                  <a class="header__link header__phone" href="tel:89304902620">8 930 490 26 20</a>
-                  <a> 
-                    <img class="header__logo" src="${logo}" alt="Логотип Inspired - магазин нижнего белья">
-                  </a>  
-            `
+        innerHTML: `<a class="header__link header__phone" href="tel:89304902620">8 930 490 26 20</a>`
     }
 );
 
+
+createElement('a',
+    {
+        className: 'header__logo',
+        href: '/#',  // # ставим чтобы не было перзагрузки страницы
+        innerHTML: `<img src="${logo}" alt="Логотип Inspired - магазин нижнего белья">`
+    },
+    {
+        parent: container
+    }
+);
 
 
 export const nav = createElement('div',
