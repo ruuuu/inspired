@@ -1,3 +1,5 @@
+// отсриовка блока hero:
+
 import { createElement } from "../createElement";
 import { TITLE } from "../const";
 

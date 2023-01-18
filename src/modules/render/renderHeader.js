@@ -1,6 +1,8 @@
+// отрисовка header:
+
 import { createElement } from "../createElement";   // имопрт фукнции createElement из файла ../createElement.js
 import logo from "../../img/logo.svg";
-
+import { search } from "./renderSeacrh";
 
 
 // кнпока поиска в шапке:
@@ -135,5 +137,6 @@ export const renderHeader = () => {
 
     const header = document.querySelector('.header');
     header.append(container);
+    header.after(search);       // после  header вставляется search
 }
 

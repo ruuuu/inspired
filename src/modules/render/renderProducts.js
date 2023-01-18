@@ -96,15 +96,16 @@ export const renderProducts = async (title, params) => {
     //           </div>
 
     //           <ul class="product__color-list">
-    //             <li class="product__color-item">
-    //               <!--color--check  это актвный  элемент-->
-    //               <div class="color color--red color--check"></div>
+    //              < !--color--check  это актвный  элемент-- >
+    //             <li class="color color--red color--check"">
+    //               
+    //
     //             </li>
-    //             <li class="product__color-item">
-    //               <div class="color color--white"></div>
+    //             <li class="color color--black">
+    //              
     //             </li>
-    //             <li class="product__color-item">
-    //               <div class="color color--black"></div>
+    //             <li class="color color--white">
+    //              
     //             </li>
     //           </ul>
     //         </article>
