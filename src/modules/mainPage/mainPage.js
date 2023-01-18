@@ -12,7 +12,7 @@ export const mainPage = (gender = 'men') => {                //  по умлча
 
     renderHero(gender);
 
-    renderProducts(); // 'НОВИНКИ', { gender: gender }
+    renderProducts('НОВИНКИ', { gender: gender });
 
     renderFooter();
 }
