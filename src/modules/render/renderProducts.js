@@ -34,13 +34,15 @@ export const renderProducts = async (title, params) => {
             },
             {
                 parent: list
-            });
+            }
+        );
 
 
         const article = createElement('article',
             {
                 className: 'product',
-                innerHTML: `<a class="product__link" href="#/product/${product.id}">
+                innerHTML: `
+                            <a class="product__link" href="#/product/${product.id}">
                                 <img class="product__image" src="${API_URL}/${product.pic}" alt="${product.title}">
                                 <h3 class="product__title">${product.title}</h3>
                             </a>
@@ -53,24 +55,20 @@ export const renderProducts = async (title, params) => {
                             </div> 
                        `
             },
-            { parent: li });
+            { parent: li }
+        );
 
 
         const colors = createElement('ul', { className: 'product__color-list' },
             {
                 parent: article,
-                append: product.colors.map((colorId, i) => {                        // product.colors = [1,2,5]
-                    const color = DATA.colors.find((item) => item.id == colorId);                               //  переберет массив и найдет item, подоход под условие. DATA.colors = [{id,title,code},{},{}]
-                    const productColorItem = createElement('li', { className: 'product__color-item' });
-                    createElement('div', { className: `color color--${color.title} ${i ? '' : 'color--check'}` });
-                    return productColorItem;
-
-                }),
-
+                appends: product.colors.map((colorId, i) => {                        // product.colors = [1,2,5]
+                    const color = DATA.colors.find((item) => item.id == colorId);                               //  переберет массив и найдет первый  item, подоход под условие. DATA.colors = [{id,title,code},{},{}]
+                    //console.log('color after find', color);
+                    return createElement('li', { className: `color color--${color.title} ${i ? '' : 'color--check'}` });
+                })   // appends: [li,li,li,li]
             }
         );
-
-
 
         return li;
     });

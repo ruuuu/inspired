@@ -8,13 +8,15 @@ import { womenMainPage } from './modules/mainPage/womenMainPage';
 import { menMainPage } from './modules/mainPage/menMainPage';
 import { getData } from './modules/getData';
 import { API_URL, DATA } from './modules/const';
-
+import { createCssColors } from './modules/createCssColors';
 
 
 const init = async () => {
     DATA.navigation = await getData(`${API_URL}/api/categories`);           // добавили объекту  свойство navigation
-    DATA.colors = await getData(`${API_URL}/api/colors`);                    // полчаем массив цветов [ {id,title,code}, {id,title,code}, {}, {} ]
-    console.log('DATA.colors ', DATA.colors);
+    DATA.colors = await getData(`${API_URL}/api/colors`);                    // добавили объекту  свойство  colors,  полчаем массив цветов [ {id,title,code}, {id,title,code}, {}, {} ]
+    //console.log('DATA.colors ', DATA.colors);
+    createCssColors(DATA.colors);
+
 
     router.on('*', () => {   // навешиваем событие: если находимся на любой стрнаице, вызовется переданная  функция 
         renderHeader();

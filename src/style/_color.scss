@@ -22,15 +22,16 @@
             border-radius: 50%;
       }
 
-      &--red:after {
-            background-color: red;
-      }
+      // эти стили сделаем через JS:
+      // &--red:after {
+      //       background-color: red;
+      // }
 
-      &--white:after {
-            background-color: white;
-      }
+      // &--white:after {
+      //       background-color: white;
+      // }
 
-      &--black:after {
-            background-color: black;
-      }
+      // &--black:after {
+      //       background-color: black;
+      // }
 }
