@@ -2,7 +2,7 @@
 
 import { createElement } from "../createElement";   // имопрт фукнции createElement из файла ../createElement.js
 import logo from "../../img/logo.svg";
-import { search } from "./renderSeacrh";
+import { search, searchToggle } from "./renderSeacrh";
 
 
 // кнпока поиска в шапке:
@@ -18,7 +18,12 @@ export const searchButton = createElement('button',
                         <path d="M16.4431 16.4438L20.9994 21.0002" stroke-width="2" stroke-linecap="round"
                               stroke-linejoin="round" />
                   </svg>
-            `
+            `,
+    },
+    {
+        cb: (btn) => {
+            btn.addEventListener('click', searchToggle);
+        },
     }
 );
 
@@ -137,6 +142,6 @@ export const renderHeader = () => {
 
     const header = document.querySelector('.header');
     header.append(container);
-    header.after(search);       // после  header вставляется search
+    header.after(search);       // после  header сразу же вставляется search
 }
 

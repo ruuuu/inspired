@@ -37,6 +37,11 @@ const init = async () => {
         });
 
 
+        router.on('search', () => {   // если находимся на  станице http://localhost:3000/#/search?value=
+            mainPage();
+        });
+
+
         router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)
             womenMainPage();
         });
@@ -55,10 +60,6 @@ const init = async () => {
         // setTimeout(() => {
         //       router.navigate('women');       // переходим на страницу http://localhost:3000/#/women  через 6 с
         // }, 6000);
-
-
-
-
 
     }
     catch (e) {

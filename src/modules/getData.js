@@ -17,19 +17,19 @@ export const getData = async (urlApi, param, cbError = () => { }) => {          
 
         const response = await fetch(url);                            // тк fetch асинхронная фукнция, поэтому await, получаем даннеы в ввиде промиса
         const data = await response.json();                             // возвращет промис, поэтому ставим await, чтобы отдавал ответ
-        console.log('response ', response);
+        //console.log('response ', response);
 
         if (!response.ok) {
             throw new Error(data.message);
         }
 
 
-        console.log('data ', data);
+        //console.log('data ', data);
 
         return data;
     }
     catch (err) {
-        console.warn(err);
+        // console.warn(err);
 
         if (typeof param === 'function') {
             param(err);
