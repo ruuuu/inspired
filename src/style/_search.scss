@@ -1,7 +1,104 @@
 .search {
       display: none;
+      margin-bottom: 36px;
+
+      @include laptop {
+            margin-bottom: 24px;
+      }
+
+
 
       &--show {
             display: block;
+      }
+
+
+      &__form {
+            width: 100%;
+            display: flex;
+            gap: 2px;
+            align-items: center;
+            height: 46px;
+
+            @include tablet {
+                  height: 36px;
+            }
+      }
+
+
+      &__input {
+            // флекс эелмент
+            flex-grow: 1;
+            height: 100%; // такая же как и у родителя
+            border: 1px solid $gray;
+            font-size: 14px;
+            line-height: 17px;
+            opacity: 0.4;
+            padding: 0 24px;
+
+            // поддержка  старых браузеров:
+            // бразуер читая строку  @supports not selector(:focus-visible), не понимает свойство :focus-visible  и пропускает ее, и выполняет все что находится внутри:
+            @supports not selector(:focus-visible) {
+
+                  // если свойство focus-visible не поддерживается,  то приментся свйства &:focus
+                  &:focus {
+                        border: 1px solid $main-color;
+                        outline: none;
+                  }
+            }
+
+
+            &:focus {
+                  outline: none;
+            }
+
+            // бразуер читая эту строку, если не понимает ее, то все что внутри не выполняет:
+            &:focus-visible {
+                  outline: none;
+                  border: 1px solid $main-color;
+            }
+
+
+            &::placeholder {
+                  opacity: 0.4;
+            }
+
+            &::-webkit-search-cancel-button {
+                  // крестик котрый появляеся когда вводим  текст в поле 
+                  display: none;
+            }
+
+
+            @include tablet {
+                  padding: 0 16px;
+                  font-size: 10px;
+                  line-height: 12px;
+            }
+      }
+
+
+      &__btn {
+            // флекс элемент
+            flex-basis: 141px; // изначальный размер, если будет свободное место, то кнпока увеичиться, если не будет места, то сузится
+            height: 100%;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+            background-color: $main-color;
+            color: $second-color;
+            border: 1px solid #FFFFFF;
+            text-transform: uppercase;
+
+
+            @include tablet {
+                  flex-basis: 124px;
+
+                  font-size: 10px;
+                  line-height: 12px;
+            }
+
+            @include mobile {
+                  flex-basis: 100px;
+            }
       }
 }

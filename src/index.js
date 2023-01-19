@@ -32,13 +32,13 @@ const init = async () => {
 
 
 
-        router.on('/', () => {   // если находимся на главной станице 
+        router.on('/', () => {          // если находимся на главной станице , то вызовется переданная фукнция
             mainPage();
         });
 
 
-        router.on('search', () => {   // если находимся на  станице http://localhost:3000/#/search?value=
-            mainPage();
+        router.on('search', (data) => {   // если находимся на  станице http://localhost:3000/#/search?value=
+            console.log(data);
         });
 
 
@@ -88,7 +88,7 @@ init();             //  начало
 
 
 
-// роутинг - переход по страницам без перезагрузки страницы  и  без лишней подгрузки html css. Для роутинга используем библиотеку navigo https://www.npmjs.com/package/navigo
+// роутинг - переход по страницам без перезагрузки страницы  и  без лишней подгрузки html и css. Для роутинга используем библиотеку navigo https://www.npmjs.com/package/navigo
 // в  package.json в dependencies записаны библииотеки для проекта,  а в devDependecies используются биииотеки только для разработки
 
 
