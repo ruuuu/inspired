@@ -11,10 +11,13 @@ import { TITLE, DATA } from "../const";
 export const renderProducts = async (title, params) => {
 
     const products = document.querySelector('.goods');
-    products.textContent = '';      // очищаем
+    products.textContent = '';                              // очищаем
 
-    const goods = await getData(`${API_URL}/api/goods?`, params);
-    console.log('goods from server при вызове станицы search', goods);
+    const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
+    //console.log('data from server ', data);
+
+    const goods = Array.isArray(data) ? data : data.goods;   // ессли data этом ассив, а не объект
+    //console.log('goods finlly ', goods)
 
     const container = createElement('div', { className: 'container goods__container' }, { parent: products });
 

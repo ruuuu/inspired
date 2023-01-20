@@ -22,7 +22,7 @@ export const searchButton = createElement('button',
     },
     {
         cb: (btn) => {
-            btn.addEventListener('click', searchToggle);
+            btn.addEventListener('click', searchToggle);        // при клике на эту кнопку, вызовется searchToggle() 
         },
     }
 );
@@ -86,6 +86,7 @@ createElement('a',
         parent: container
     }
 );
+
 
 
 export const nav = createElement('div',

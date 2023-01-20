@@ -35,7 +35,7 @@ export const renderNavigation = (gender) => {
 
 
     for (const genderName in DATA.navigation) {      // genderName = women/men. DATA.navigation = { women: {title: , list: },  men: {title: , list: }   }
-        console.log('DATA.navigation in for ', DATA.navigation);
+        //console.log('DATA.navigation in for ', DATA.navigation);
         createElement('a',
             {
                 className: `gender__link ${gender === genderName ? 'gender__link--active' : ''}`,
