@@ -10,7 +10,7 @@ import { getData } from './modules/getData';
 import { API_URL, DATA } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
 import { createElement } from './modules/createElement';
-
+import { renderProducts } from './modules/render/renderProducts';
 
 
 
@@ -31,14 +31,19 @@ const init = async () => {
 
 
 
-
+        // роутинг: 
         router.on('/', () => {          // если находимся на главной станице , то вызовется переданная фукнция
             mainPage();
         });
 
 
-        router.on('search', (data) => {   // если находимся на  станице http://localhost:3000/#/search?value=
-            console.log(data);
+        router.on('search', (data) => {           // если находимся на  станице http://localhost:3000/#/search?value=
+            console.log(data.params.value);
+
+            //const data = await getData(`${API_URL}/api/goods?`, { search: 'носки' });
+            //console.log('data search from server ', data);
+            renderProducts('НОВИНКИ', { search: data.params.value });           // gender: gender,
+
         });
 
 
@@ -67,24 +72,20 @@ const init = async () => {
             {
                 parent: document.querySelector('main'),
                 cb(h2) {
-                    h2.style.textAlign = 'center'; // присвоили свойство text-align
+                    h2.style.textAlign = 'center';              // присвоили свойство text-align
                 }
             });
 
         console.log(e);
     }
     finally {
-
         router.resolve();                         //  активируем роутинг
     }
-
-
-
 
 }
 
 
-init();             //  начало
+init();             //  НАЧАЛО осюда
 
 
 

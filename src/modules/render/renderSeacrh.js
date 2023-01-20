@@ -1,4 +1,4 @@
-// отрисовка поля поиска в header:
+// отрисовка формы  поиска в header:
 import { createElement } from "../createElement";
 import { seachController } from "../controllers/seachController";
 
@@ -23,15 +23,17 @@ const container = createElement('div',
     }
 );
 
-const form = createElement('form',
+
+export const form = createElement('form',
     {
         className: 'search__form'
     },
     {
         parent: container,
-        cb: seachController
+        cb: seachController  // вешаем обработчик события на форму
     }
 );
+
 
 createElement('input',
     {

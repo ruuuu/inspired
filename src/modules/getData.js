@@ -9,7 +9,7 @@ export const getData = async (urlApi, param, cbError = () => { }) => {          
         const url = new URL(urlApi);
 
         if (param && typeof param === 'object') {
-            for (const key in param) {                          // перебираем объект param { gender:'men', category:'bathrobes' }
+            for (const key in param) {                          // перебираем объект param = { gender:'men', category:'bathrobes', search: '', count: '' }
                 url.searchParams.set(key, param[key]);          // устанавливаем параметры поиска http://localhost:8024/api/goods?name=value
             }
         }

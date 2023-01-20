@@ -1,4 +1,4 @@
-// отрисовка карточек товаров:
+// отрисовка спсика карточек товаров:
 import { getData } from "../getData";
 import { API_URL } from "../const";
 import { createElement } from "../createElement";
@@ -13,8 +13,8 @@ export const renderProducts = async (title, params) => {
     const products = document.querySelector('.goods');
     products.textContent = '';      // очищаем
 
-    const goods = await getData(`${API_URL}/api/goods`, params);
-    console.log('goods from server ', goods);
+    const goods = await getData(`${API_URL}/api/goods?`, params);
+    console.log('goods from server при вызове станицы search', goods);
 
     const container = createElement('div', { className: 'container goods__container' }, { parent: products });
 
@@ -25,12 +25,11 @@ export const renderProducts = async (title, params) => {
 
 
 
-    const listCard = goods.map((product) => {
+    const listCard = goods.map((product) => {    // перебираем [{}, {}, {}]
 
         const li = createElement('li',
             {
                 className: 'goods__item',
-
             },
             {
                 parent: list
@@ -66,7 +65,7 @@ export const renderProducts = async (title, params) => {
                     const color = DATA.colors.find((item) => item.id == colorId);                               //  переберет массив и найдет первый  item, подоход под условие. DATA.colors = [{id,title,code},{},{}]
                     //console.log('color after find', color);
                     return createElement('li', { className: `color color--${color.title} ${i ? '' : 'color--check'}` });
-                })   // appends: [li,li,li,li]
+                })   // appends: [li, li, li, li]
             }
         );
 
