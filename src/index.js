@@ -73,7 +73,7 @@ const init = async () => {
 
     }
     catch (e) {
-        createElement('h2', { textContent: 'Чтото пошло не так' },
+        createElement('h2', { textContent: 'Что-то пошло не так' },
             {
                 parent: document.querySelector('main'),
                 cb(h2) {

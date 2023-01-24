@@ -8,13 +8,13 @@ import { TITLE, DATA } from "../const";
 
 
 
-export const renderProducts = async (title, params) => {
+export const renderProducts = async (title, params) => { //  ставим async тк ув ыукни есть запрос на сервер
 
     const products = document.querySelector('.goods');
     products.textContent = '';                              // очищаем
 
     const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
-    //console.log('data from server ', data);
+    console.log('data from server ', data);
 
     const goods = Array.isArray(data) ? data : data.goods;   // ессли data этом ассив, а не объект
     //console.log('goods finlly ', goods)
@@ -61,7 +61,7 @@ export const renderProducts = async (title, params) => {
         );
 
 
-        const colors = createElement('ul', { className: 'product__color-list' },
+        createElement('ul', { className: 'product__color-list' },
             {
                 parent: article,
                 appends: product.colors.map((colorId, i) => {                        // product.colors = [1,2,5]
@@ -75,6 +75,19 @@ export const renderProducts = async (title, params) => {
         return li;
     });
 
+
+
+    if (data.pages && data.pages > 1) { // рисукм  кнопки пагинации
+        const pagination = createElement('div',
+            {
+                className: 'goods__pagination pagination'
+            },
+            {
+                parent: container
+            }
+
+        );
+    }
 
 
     // products.innerHTML = `

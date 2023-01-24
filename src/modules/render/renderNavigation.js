@@ -3,10 +3,25 @@ import { createElement } from "../createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
 import { DATA } from "../const";
 
+let flag = false;                               // управляет перерисовкой меню
 
-export const renderNavigation = (gender) => {
+
+export const renderNavigation = (gender) => {               // gender='men'/'women'
 
     const navigation = document.querySelector('.navigation');
+
+    if (!gender) {                          // если нет gender
+        navigation.style.display = 'none';
+    }
+    else {
+        navigation.style.display = '';           // значение по умолчаию(меню  отображаеся)
+    }
+
+    if (flag) {
+        return;                                 // дальше прогамма не выполнится
+    }
+
+    flag = true;
 
     navigation.textContent = '';     // очищем сперва, потом заполняем
 
@@ -60,16 +75,14 @@ export const renderNavigation = (gender) => {
             {
                 append: createElement('a',
                     {
-                        className: 'category__link',
+                        className: `category__link ${category === item.slug ? 'category__link--active' : ''}`,
                         textContent: item.title,
                         href: `#/${gender}/${item.slug}`
                     },
                     {
-                        cb(elem) {
+                        cb(elem) {  // коллбэк
                             elem.addEventListener('click', () => {
-                                document
-                                    .querySelector('.category__link--active')
-                                    ?.classList.remove('category__link--active');
+                                document.querySelector('.category__link--active')?.classList.remove('category__link--active');
 
                                 elem.classList.add('category__link--active');
                             });
