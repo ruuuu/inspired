@@ -14,14 +14,13 @@ import { categoryPage } from './modules/categoryPage';
 
 const init = async () => {
     try {
-
         DATA.navigation = await getData(`${API_URL}/api/categories`);           // добавили объекту  свойство navigation
         DATA.colors = await getData(`${API_URL}/api/colors`);                    // добавили объекту  свойство  colors,  полчаем массив цветов [ {id,title,code}, {id,title,code}, {}, {} ]
         console.log('DATA.navigation ', DATA.navigation);
 
         createCssColors(DATA.colors);
 
-
+        // роутинг: 
         router.on('*', () => {   // навешиваем событие: если находимся на любой стрнаице, вызовется переданная  функция 
             renderHeader();
             renderFooter();
@@ -29,26 +28,22 @@ const init = async () => {
 
 
 
-
-
-
-        // роутинг: 
         router.on('/', () => {          // если находимся на главной станице , то вызовется переданная фукнция
             mainPage();
         });
 
+        // поиск:
+        router.on('search', (data) => {           // если находимся на  станице http://localhost:3000/#/search?value=
+            console.log(data.params.value);
 
-        // router.on('search', (data) => {           // если находимся на  станице http://localhost:3000/#/search?value=
-        //     console.log(data.params.value);
+            //const data = await getData(`${API_URL}/api/goods?`, { search: 'носки' });
+            //console.log('data search from server ', data);
+            renderProducts('НОВИНКИ', { search: data.params.value });           // gender: gender,
 
-        //     //const data = await getData(`${API_URL}/api/goods?`, { search: 'носки' });
-        //     //console.log('data search from server ', data);
-        //     renderProducts('НОВИНКИ', { search: data.params.value });           // gender: gender,
-
-        // });
+        });
 
 
-
+        // фильтрация по категориям:
         router.on('/:gender/:category', categoryPage);              // когда  находимся на этой станице, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
 
 
@@ -90,7 +85,7 @@ const init = async () => {
 }
 
 
-init();             //  НАЧАЛО осюда
+init();             //  НАЧАЛО отсюда
 
 
 

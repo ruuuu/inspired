@@ -63,7 +63,7 @@ export const renderFooter = () => {               // gender = women/men
 
 
 
-    for (const genderName in DATA.navigation) {      // genderName = women/men
+    for (const genderName in DATA.navigation) {      // genderName = women/men,  DATA.navigation = [ men: {title: 'Мужское', list: Array(4)},  women: {title: 'Мужское', list: Array(4)} ]
 
         const footerCategoryItem = createElement('li', { className: 'footer-category__item' }, { parent: footerCategoryList });
         const h3 = createElement('h3', { className: 'footer-category__subtitle' }, { parent: footerCategoryItem });
@@ -219,7 +219,7 @@ export const renderFooter = () => {               // gender = women/men
     // );
 
 
-    //container.insertAdjacentHTML('beforeend', // верстка вставится перед закрывающемся тегом
+    // container.insertAdjacentHTML('beforeend', // верстка вставится перед закрывающемся тегом
     // `  
     //           <div class="footer__item footer__item--social footer-social">  +
     //             <h2 class="footer__title footer-social__title">Связаться с нами</h2> +

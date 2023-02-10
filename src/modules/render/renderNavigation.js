@@ -4,11 +4,13 @@ import { dataNavigation } from "../dataNavigation";       // импортиру�
 import { DATA } from "../const";
 
 let flag = false;                               // управляет перерисовкой меню
+let oldGender = '';
 
 
-export const renderNavigation = (gender) => {               // gender='men'/'women'
+export const renderNavigation = (gender, category) => {               // gender='men'/'women'
 
     const navigation = document.querySelector('.navigation');
+
 
     if (!gender) {                          // если нет gender
         navigation.style.display = 'none';
@@ -17,11 +19,13 @@ export const renderNavigation = (gender) => {               // gender='men'/'wom
         navigation.style.display = '';           // значение по умолчаию(меню  отображаеся)
     }
 
-    if (flag) {
+    if (flag && oldGender === gender) {
         return;                                 // дальше прогамма не выполнится
     }
 
     flag = true;
+    oldGender = gender;  // при переключении gender происходит перерисовка  navigation
+
 
     navigation.textContent = '';     // очищем сперва, потом заполняем
 
@@ -49,7 +53,7 @@ export const renderNavigation = (gender) => {               // gender='men'/'wom
 
 
 
-    for (const genderName in DATA.navigation) {      // genderName = women/men. DATA.navigation = { women: {title: , list: },  men: {title: , list: }   }
+    for (const genderName in DATA.navigation) {      // genderName = women/men, DATA.navigation = { women: {title: , list: },  men: {title: , list: }   }
         //console.log('DATA.navigation in for ', DATA.navigation);
         createElement('a',
             {
@@ -66,8 +70,8 @@ export const renderNavigation = (gender) => {               // gender='men'/'wom
 
 
 
-    const categoryElems = DATA.navigation[gender].list.map((item) => {       //   dataNavigation[gender].list = [{},{},{}],    map перебирает массив и возвращает новый categoryElems
-        // console.log('item ', item);
+    const categoryElems = DATA.navigation[gender].list.map((item) => {       //   dataNavigation[gender].list = [ { title: , slug: }, {}, {} ],    map перебирает массив и возвращает новый массив categoryElems
+        console.log('item ', item);
         const li = createElement('li',
             {
                 className: 'category__item',
@@ -83,7 +87,6 @@ export const renderNavigation = (gender) => {               // gender='men'/'wom
                         cb(elem) {  // коллбэк
                             elem.addEventListener('click', () => {
                                 document.querySelector('.category__link--active')?.classList.remove('category__link--active');
-
                                 elem.classList.add('category__link--active');
                             });
                         }

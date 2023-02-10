@@ -1,10 +1,10 @@
 // отрисовка спсика карточек товаров:
 import { getData } from "../getData";
-import { API_URL } from "../const";
+import { API_URL, COUNT_PAGINATION } from "../const";
 import { createElement } from "../createElement";
 import photo from "../../img/photo.jpg";
 import { TITLE, DATA } from "../const";
-
+import { renderPagination } from "./renderPagintion";
 
 
 
@@ -87,6 +87,9 @@ export const renderProducts = async (title, params) => { //  ставим async 
             }
 
         );
+
+        renderPagination(pagination, data.page, data.pages, COUNT_PAGINATION);  // отрисовка пагинации
+
     }
 
 
