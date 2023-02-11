@@ -22,7 +22,7 @@ export const categoryPage = (routerData) => {
 
     renderNavigation(gender, category);               // отрисвка меню
 
-    renderHero(false);                      // если gender = false
+    renderHero(false);                                  // если gender = false
 
     renderProducts(title, params);
 
