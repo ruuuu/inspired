@@ -1,6 +1,7 @@
 // отрисовка пагинации:
-import { createElement } from "../createElement";
-import { router } from "../router";
+
+import { createElement } from "../utils/createElement";
+import { router } from "../utils/router";
 
 //                                                  pages - общее кол-во стрнаиц  count- число отображаемых страниц(квадратиков)
 export const renderPagination = (wrapperPagination, page, pages, count) => {              //    data = { goods: [{},{},{}],  pages: ,  page: ,  totalCount: }

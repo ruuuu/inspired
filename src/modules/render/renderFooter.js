@@ -1,4 +1,4 @@
-import { createElement } from "../createElement";
+import { createElement } from "../utils/createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
 import { DATA } from "../const";
 

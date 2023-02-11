@@ -1,10 +1,10 @@
 // отрисовка меню в шапке:
-import { createElement } from "../createElement";
+import { createElement } from "../utils/createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
 import { DATA } from "../const";
 
 let flag = false;                               // управляет перерисовкой меню
-let oldGender = '';
+let oldGender = 'women';                        // нач значение
 
 
 export const renderNavigation = (gender, category) => {               // gender='men'/'women'
@@ -22,6 +22,12 @@ export const renderNavigation = (gender, category) => {               // gender=
     if (flag && oldGender === gender) {
         return;                                 // дальше прогамма не выполнится
     }
+
+
+    if (gender === 'all') {
+        gender = oldGender;
+    }
+
 
     flag = true;
     oldGender = gender;  // при переключении gender происходит перерисовка  navigation

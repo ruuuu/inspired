@@ -1,6 +1,8 @@
 export const searchPage = (routerData) => {
 
-    const { gender, search } = routerData.data;               // выбранный пол и категория 
+    console.log('routerData ', routerData)
+
+    const { gender, search } = routerData.data;               // выбранный пол и категория, деструктуризация 
     const params = { gender, search };
     // console.log('params in  categoryPage', params);
 

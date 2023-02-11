@@ -9,13 +9,13 @@ export const getData = async (urlApi, param, cbError = () => { }) => {          
         const url = new URL(urlApi);
 
         if (param && typeof param === 'object') {
-            for (const key in param) {                          // перебираем объект param = { gender:'men', category:'bathrobes', search: '', count: '' }
+            for (const key in param) {                          // перебираем объект param = { gender:'men',  category:'bathrobes',  search: '',  count: '' }
                 url.searchParams.set(key, param[key]);          // устанавливаем параметры поиска http://localhost:8024/api/goods?name=value
             }
         }
 
 
-        const response = await fetch(url);                            // тк fetch асинхронная фукнция, поэтому await, получаем даннеы в ввиде промиса
+        const response = await fetch(url);                            // тк fetch асинхронная фукнция, поэтому await, иначе получаем даннеы в ввиде промиса
         const data = await response.json();                             // возвращет промис, поэтому ставим await, чтобы отдавал ответ
         //console.log('response ', response);
 

@@ -1,6 +1,6 @@
 // отрисовка header:
 
-import { createElement } from "../createElement";   // имопрт фукнции createElement из файла ../createElement.js
+import { createElement } from "../utils/createElement";   // имопрт фукнции createElement из файла ../createElement.js
 import logo from "../../img/logo.svg";
 import { search, searchToggle } from "./renderSeacrh";
 

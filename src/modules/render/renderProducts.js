@@ -1,7 +1,8 @@
 // отрисовка спсика карточек товаров:
+
 import { getData } from "../getData";
 import { API_URL, COUNT_PAGINATION } from "../const";
-import { createElement } from "../createElement";
+import { createElement } from "../utils/createElement";
 import photo from "../../img/photo.jpg";
 import { TITLE, DATA } from "../const";
 import { renderPagination } from "./renderPagintion";
@@ -9,12 +10,13 @@ import { renderPagination } from "./renderPagintion";
 
 
 export const renderProducts = async (title, params) => { //  ставим async тк ув ыукни есть запрос на сервер
+    // console.log('params ', params);
 
     const products = document.querySelector('.goods');
     products.textContent = '';                              // очищаем
 
     const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
-    console.log('data from server ', data);
+    //console.log('data from server ', data);
 
     const goods = Array.isArray(data) ? data : data.goods;   // ессли data этом ассив, а не объект
     //console.log('goods finlly ', goods)
@@ -73,7 +75,7 @@ export const renderProducts = async (title, params) => { //  ставим async 
         );
 
         return li;
-    });
+    });  // map
 
 
 

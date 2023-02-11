@@ -1,22 +1,24 @@
 import './index.html';
 import './index.scss';
-import { router } from './modules/router';
+import { router } from './modules/utils/router';
 import { renderHeader } from './modules/render/renderHeader';
 import { renderFooter } from './modules/render/renderFooter';
-import { mainPage } from './modules/mainPage';
+import { mainPageController } from './modules/controllers/mainPageController';
 import { getData } from './modules/getData';
 import { API_URL, DATA } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
-import { createElement } from './modules/createElement';
-import { renderProducts } from './modules/render/renderProducts';
-import { categoryPage } from './modules/categoryPage';
+import { createElement } from './modules/utils/createElement';
+import { categoryPageController } from './modules/controllers/categoryPageController';
+import { searchPageController } from './modules/controllers/seachController';
+
 
 
 const init = async () => {
+
     try {
-        DATA.navigation = await getData(`${API_URL}/api/categories`);           // добавили объекту  свойство navigation
+        DATA.navigation = await getData(`${API_URL}/api/categories`);            // добавили объекту  свойство navigation
         DATA.colors = await getData(`${API_URL}/api/colors`);                    // добавили объекту  свойство  colors,  полчаем массив цветов [ {id,title,code}, {id,title,code}, {}, {} ]
-        console.log('DATA.navigation ', DATA.navigation);
+        //console.log('DATA.navigation ', DATA.navigation);                      // DATA.navigation = { women: {title: , list: },    men: {title: , list: } }
 
         createCssColors(DATA.colors);
 
@@ -29,31 +31,28 @@ const init = async () => {
 
 
         router.on('/', () => {          // если находимся на главной станице , то вызовется переданная фукнция
-            mainPage();
+            mainPageController();
         });
+
+
 
         // поиск:
-        router.on('search', (data) => {           // если находимся на  станице http://localhost:3000/#/search?value=
-            console.log(data.params.value);
+        router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController
 
-            //const data = await getData(`${API_URL}/api/goods?`, { search: 'носки' });
-            //console.log('data search from server ', data);
-            renderProducts('НОВИНКИ', { search: data.params.value });           // gender: gender,
-
-        });
 
 
         // фильтрация по категориям:
-        router.on('/:gender/:category', categoryPage);              // когда  находимся на этой станице, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
+        router.on('/:gender/:category', categoryPageController);              // когда  находимся на станице /:gender/:category, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
 
 
         router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)
-            mainPage('women');
+            mainPageController('women');
         });
 
 
+
         router.on('men', () => {             // если находимся на  станице http://localhost:3000/#/men
-            mainPage('men');
+            mainPageController('men');
         });
 
 
@@ -83,6 +82,8 @@ const init = async () => {
     }
 
 }
+
+
 
 
 init();             //  НАЧАЛО отсюда
