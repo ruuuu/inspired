@@ -22,15 +22,20 @@ export const seachController = (form) => {
 
 
 export const searchPageController = (routerData) => {
-    console.log('routerData ', routerData);
+    console.log('routerData in searchPageController ', routerData);
 
-    const params = {    // query параметры
-        search: routerData.params.value
+    const params = {    // query параметры, объекту добавили своойство search
+        search: routerData.params.value,
+        //count: 9 // число товаров на страницу
     };
+
+    if (routerData.params?.page) {                  // есл у routerData.params есть свойство page
+        params.page = routerData.params?.page;      // объекту params добавляем свойство page
+    }
 
     renderNavigation('all');               // отрисвка меню
 
     renderHero(false);                                  // если gender = false
 
-    renderProducts(routerData.params.value, params);
+    renderProducts(routerData.params.value, params);    // params = { search:  , count: ,  page: } 
 };

@@ -4,29 +4,59 @@ import { getData } from "../getData";
 import { API_URL, COUNT_PAGINATION } from "../const";
 import { createElement } from "../utils/createElement";
 import photo from "../../img/photo.jpg";
-import { TITLE, DATA } from "../const";
+import { TITLE, DATA, products } from "../const";
 import { renderPagination } from "./renderPagintion";
+import { getFavorite } from "../controllers/favoriteController";
 
 
+export const renderProducts = async (title, params) => {    //  ставим async тк ув ыукни есть запрос на сервер
+    console.log('params ', params);                         // { gender: 'men' } или  { gender: 'men' ,  category: 'pijams} или  { gender: 'men' ,  category: 'pijams,  page: 2}
 
-export const renderProducts = async (title, params) => { //  ставим async тк ув ыукни есть запрос на сервер
-    // console.log('params ', params);
 
-    const products = document.querySelector('.goods');
     products.textContent = '';                              // очищаем
 
-    const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
-    //console.log('data from server ', data);
 
-    const goods = Array.isArray(data) ? data : data.goods;   // ессли data этом ассив, а не объект
-    //console.log('goods finlly ', goods)
+    const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
+
+    const goods = Array.isArray(data) ? data : data.goods;   // ессли data это массив, а не объект
+
 
     const container = createElement('div', { className: 'container goods__container' }, { parent: products });
 
-    const h2 = createElement('h2', { className: 'goods__title', textContent: title }, { parent: container });
+    const titleElem = createElement('h2', { className: 'goods__title', textContent: title }, { parent: container });
 
 
     const list = createElement('ul', { className: 'goods__list' }, { parent: container });
+
+
+    if (Object.hasOwn(data, 'totalCount')) {  // проверяет есть ли у объекта data свойство totalCount
+        createElement('sup',
+            {
+                className: 'goods__title-sup',
+                innerHTML: `&nbsp(${data?.totalCount})` // data?.totalCount  если у объекта data  есть свойство totalCount
+            },
+            {
+                parent: titleElem
+            }
+        );
+
+
+        if (!data.totalCount) {
+            createElement('p', {
+                className: 'goods__warning',
+                textContent: 'По вашему запросу ничегоь не найдено'
+            },
+                {
+                    parent: container
+                });
+
+            return;         // дальше код не будет выполнчться
+        }
+    }
+
+
+
+    const favoriteList = getFavorite(); // список избранных товаров(из localStoridge)
 
 
 
@@ -54,7 +84,7 @@ export const renderProducts = async (title, params) => { //  ставим async 
                             <div class="product__row">
                                 <p class="product__price">руб ${product.price} </p>
                                  <!-- aria-label показывает что делает кнопка, полезно для слепых людей -->
-                                <button class="product__btn-favorite" data-id="${product.id}"   aria-label="Добавить товар в избранное">
+                                <button class="product__btn-favorite favorite ${favoriteList.includes(product.id) ? 'favorite--active' : ''}" data-id="${product.id}"   aria-label="Добавить товар в избранное">
                                 </button>
                             </div> 
                        `
@@ -79,7 +109,7 @@ export const renderProducts = async (title, params) => { //  ставим async 
 
 
 
-    if (data.pages && data.pages > 1) { // рисукм  кнопки пагинации
+    if (data.pages && data.pages > 1) { // рисуем  кнопки пагинации
         const pagination = createElement('div',
             {
                 className: 'goods__pagination pagination'

@@ -1,15 +1,13 @@
 // отрисовка меню в шапке:
 import { createElement } from "../utils/createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
-import { DATA } from "../const";
+import { DATA, navigation } from "../const";
 
 let flag = false;                               // управляет перерисовкой меню
 let oldGender = 'women';                        // нач значение
 
 
 export const renderNavigation = (gender, category) => {               // gender='men'/'women'
-
-    const navigation = document.querySelector('.navigation');
 
 
     if (!gender) {                          // если нет gender

@@ -1,6 +1,8 @@
 export const DATA = {};                     // в init() заполняем 
 export const API_URL = 'http://localhost:8024';
-export const COUNT_PAGINATION = 3;
+export const COUNT_PAGINATION = 3;  // число отображаемых квадратиков(страниц)
+
+
 
 export const TITLE = {
     women: {
@@ -12,3 +14,14 @@ export const TITLE = {
         id: '7687789495'
     }
 }
+
+
+export const header = document.querySelector('.header');
+export const navigation = document.querySelector('.navigation');
+export const hero = document.querySelector('.hero');
+export const main = document.querySelector('.main');
+export const products = document.querySelector('.goods');
+export const footer = document.querySelector('.footer');
+
+
+

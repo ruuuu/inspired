@@ -3,6 +3,7 @@
 import { createElement } from "../utils/createElement";   // имопрт фукнции createElement из файла ../createElement.js
 import logo from "../../img/logo.svg";
 import { search, searchToggle } from "./renderSeacrh";
+import { header } from "../const";
 
 
 // кнпока поиска в шапке:
@@ -21,7 +22,7 @@ export const searchButton = createElement('button',
             `,
     },
     {
-        cb: (btn) => {
+        cb: (btn) => {  // 
             btn.addEventListener('click', searchToggle);        // при клике на эту кнопку, вызовется searchToggle() 
         },
     }
@@ -44,7 +45,7 @@ export const cartLink = createElement('a',
                               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
             `,
-        href: 'cart'
+        href: '#cart'
     }
 );
 
@@ -62,8 +63,13 @@ export const favoriteLink = createElement('a',
                               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
             `,
-        href: 'favorite'
-    }
+        href: '#favorite'
+    },
+    // {
+    //     cb: (btn) => {  // 
+    //         btn.addEventListener('click', searchToggle);        // при клике на эту кнопку, вызовется searchToggle() 
+    //     },
+    // }
 );
 
 
@@ -141,7 +147,7 @@ createElement('ul',
 
 export const renderHeader = () => {
 
-    const header = document.querySelector('.header');
+
     header.append(container);
     header.after(search);       // после  header сразу же вставляется search
 }

@@ -9,20 +9,20 @@ import { DATA } from "../const";
 
 
 export const categoryPageController = (routerData) => {
-    console.log('routerData in categoryPage ', routerData);
+    console.log('routerData in categoryPageController ', routerData);
 
-    const { gender, category } = routerData.data;               // деструтруизация, выбранный пол и категория 
-    const params = { gender, category };                        // query параметры ?gender/category
+    const { gender, category } = routerData.data;               // деструтруизация, выбранный gender и category
+    const params = { gender, category, count: 6 };                        // count - число отображаеаемых товаров на трсаницу
     // console.log('params in  categoryPage', params);
 
     if (routerData.params?.page) {                              // если у routerData.params есть свойство page(условное обращение к свойству)
-        params.page = routerData.params?.page;
+        params.page = routerData.params?.page;                  // обновляем свойосв page
     }
 
     const title = DATA.navigation[gender].list.find((item) => item.slug === category).title;            // метод find ищет в массиве [ {slug:, title: }, {}, {} ] первый элемент удовлетвор условию, и возарщает его. И берем у него свойство title
 
 
-    renderNavigation(gender, category);               // отрисвка меню
+    renderNavigation(gender, category);                 // отрисвка меню
 
     renderHero(false);                                  // если gender = false
 

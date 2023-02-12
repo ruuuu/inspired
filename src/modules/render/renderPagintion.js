@@ -2,9 +2,14 @@
 
 import { createElement } from "../utils/createElement";
 import { router } from "../utils/router";
+import { getUrl } from "../utils/getUrl";
 
-//                                                  pages - общее кол-во стрнаиц  count- число отображаемых страниц(квадратиков)
+
+//                                                  pages - общее кол-во стрнаиц  count- число отображаемых товаров
 export const renderPagination = (wrapperPagination, page, pages, count) => {              //    data = { goods: [{},{},{}],  pages: ,  page: ,  totalCount: }
+
+
+
     wrapperPagination.innerHTML = '';             // тк пагинация при перезагрузке страницы обноаляется
 
     const paginationList = createElement('ul',
@@ -19,11 +24,11 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {    
 
     // 1 2 3 4 5 (count=5),  page = 2(номер текущей страницы), pages=8 
     const isNotStart = (page - Math.floor(count / 2)) > 1;        //   если мы  не вначале страницы.  Math.floor округляет
-    console.log('isNotStart ', isNotStart);
+
 
     // 5 6 7 8
     const isEnd = (page + Math.floor(count / 2)) > pages;         // если в конце списка страниц
-    console.log('isEnd ', isEnd);
+
 
     if (count > pages) {
         count = pages;
@@ -51,12 +56,12 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {    
                 append: createElement('a',
                     {
                         textContent: n,
-                        href: `${router.getCurrentLocation().url}?page=${n}`,
+                        href: getUrl({ page: n }),                  // страница /#/women/pajams?page=n 
                         className: `pagination__link ${page === n ? 'pagination__link--active' : ''}`
                     })
             }
         );
-    }
+    } // for
 
 
 
@@ -65,7 +70,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {    
         createElement('a',
             {
                 className: `pagination__arrow pagination__arrow--start ${!isNotStart ? 'pagination__arrow--disabled' : ''}`,
-                href: `${router.getCurrentLocation().url}?page=${1}`,         // router.getCurrentLocation().url выдает урл текущ станицы
+                href: getUrl({ page: 1 }),         // router.getCurrentLocation().url выдает урл текущ станицы
                 textContent: 'start',
                 ariaLabel: 'В начало'                                         // атрибут aria-label
             },
@@ -79,7 +84,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {    
         createElement('a',
             {
                 className: `pagination__arrow pagination__arrow--end ${isEnd ? 'pagination__arrow--disabled' : ''}`,
-                href: `${router.getCurrentLocation().url}?page=${pages}`,
+                href: getUrl({ page: pages }),
                 textContent: 'end',
                 ariaLabel: 'В конец'                                        // атрибут aria-label
             },

@@ -2,11 +2,11 @@
 
 import { createElement } from "../utils/createElement";
 import { TITLE } from "../const";
-
+import { hero } from "../const";
 
 export const renderHero = (gender) => {               // gender = men/women
 
-    const hero = document.querySelector('.hero');      // <section>
+
 
     if (!gender) {
         hero.style.display = 'none';

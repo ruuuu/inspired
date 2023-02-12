@@ -1,11 +1,9 @@
 import { createElement } from "../utils/createElement";
 import { dataNavigation } from "../dataNavigation";       // импортируем объект dataNavigation
-import { DATA } from "../const";
+import { DATA, footer } from "../const";
 
 
 export const renderFooter = () => {               // gender = women/men
-
-    const footer = document.querySelector('.footer');
 
     footer.textContent = '';                          // изначально очищаем
 
