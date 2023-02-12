@@ -10,7 +10,7 @@ import { createCssColors } from './modules/createCssColors';
 import { createElement } from './modules/utils/createElement';
 import { categoryPageController } from './modules/controllers/categoryPageController';
 import { searchPageController } from './modules/controllers/seachController';
-
+import { favoriteController } from './modules/controllers/favoriteController';
 
 
 const init = async () => {
@@ -38,6 +38,11 @@ const init = async () => {
 
         // поиск:
         router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController
+
+
+
+        // Избранное:
+        router.on('favorite', favoriteController);   // когда наъодимся на станице favorite, вызоветс фукнция favoriteController
 
 
 

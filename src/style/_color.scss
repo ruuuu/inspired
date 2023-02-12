@@ -2,6 +2,7 @@
       position: relative; // большой круг, отноисльно этого элемента будем бьшой круг делать
       width: 18px;
       height: 18px;
+      display: block;
       border: 1px solid $light-gray;
       border-radius: 50%;
 

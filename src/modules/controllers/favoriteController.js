@@ -6,7 +6,7 @@ import { renderHero } from "../render/renderHero";
 import { products } from "../const";
 
 
-// избрранеы товары бдум хранить в localStorage
+// Избранные товары будем хранить в localStorage
 export const getFavorite = () => {
     return JSON.parse(localStorage.getItem('favorite') || '[]');            // достаем из локалсторидж по ключу favorite, parse  из сроки превращает в массив
 };
@@ -22,18 +22,24 @@ const addFavorite = (id) => {  // id товара
 
 
 
-// удаление товара из Избранное:
+// удаление товара по его id из Избранное:
 const removeFavorite = (id) => {
     const favoriteList = getFavorite();
 
-    // const newFavoriteList = favoriteList.map((item) => {  // перебирвет массив favoriteList и получаем новый массив , элементв корого  подходят под условие
-    //     return item.id !== id
-    // });
+    // получаем  индекс удаляемого элемента:
+    const index = favoriteList.findIndex((item) => {
+        return item.id === id;
+    });
 
-    // console.log('newFavoriteList ', newFavoriteList);
+    console.log('index удаяемого элемента ', index);
 
+    if (index === -1) {
+        return;             // дальше код не будте выполняться
+    }
 
-    localStorage.setItem('favorite', JSON.stringify(newFavoriteList));
+    favoriteList.splice(index, 1);                                          // splice удаляет  часть массива, передаем индекс начиная с котрого начнется удаление , и число удаляемых элементов. Мы удаляем один элемент с индексом index
+
+    localStorage.setItem('favorite', JSON.stringify(favoriteList));         //  записываем  обнолвенный массив в localStorage
 };
 
 
@@ -71,5 +77,5 @@ export const favoriteController = () => {
 
     renderHero(false);                                  // если gender = false
 
-    renderProducts('Избранное', { list: getFavorite() });    // список товаров из Избранное
+    renderProducts('Избранное', { list: getFavorite() });    // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
 };
