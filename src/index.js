@@ -11,6 +11,9 @@ import { createElement } from './modules/utils/createElement';
 import { categoryPageController } from './modules/controllers/categoryPageController';
 import { searchPageController } from './modules/controllers/seachController';
 import { favoriteController } from './modules/controllers/favoriteController';
+import { cardController } from './modules/controllers/cardController';
+
+
 
 
 const init = async () => {
@@ -47,7 +50,12 @@ const init = async () => {
 
 
         // фильтрация по категориям:
-        router.on('/:gender/:category', categoryPageController);              // когда  находимся на станице /:gender/:category, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
+        router.on('/:gender/:category', categoryPageController);              // у gender и category ставим двоеточие, чобы получать их значения.  Когда  находимся на станице /:gender/:category, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
+
+
+        // переход на  карточку товара:
+        router.on('/product/:id', cardController);                             // у id  стаивм двоеточие, чтобы его получать
+
 
 
         router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)

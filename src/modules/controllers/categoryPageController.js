@@ -11,7 +11,11 @@ import { DATA } from "../const";
 export const categoryPageController = (routerData) => {
     console.log('routerData in categoryPageController ', routerData);
 
-    const { gender, category } = routerData.data;               // деструтруизация, выбранный gender и category
+    if (!Object.keys(DATA.navigation).includes(gender)) {    // Object.keys(DATA.navigation) получим свойтсва объекта в виде массива ['men', 'women']
+        return;
+    }
+
+    const { gender, category } = routerData.data;                           // деструтруизация, выбранный gender и category
     const params = { gender, category, count: 6 };                        // count - число отображаеаемых товаров на трсаницу
     // console.log('params in  categoryPage', params);
 
@@ -24,7 +28,7 @@ export const categoryPageController = (routerData) => {
 
     renderNavigation(gender, category);                 // отрисвка меню
 
-    renderHero(false);                                  // если gender = false
+    renderHero(false);                                  // нео тображает блок Hero
 
     renderProducts(title, params);
 
