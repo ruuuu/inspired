@@ -75,7 +75,7 @@ export const renderNavigation = (gender, category) => {               // gender=
 
 
     const categoryElems = DATA.navigation[gender].list.map((item) => {       //   dataNavigation[gender].list = [ { title: , slug: }, {}, {} ],    map перебирает массив и возвращает новый массив categoryElems
-        console.log('item ', item);
+        //console.log('item ', item);
         const li = createElement('li',
             {
                 className: 'category__item',

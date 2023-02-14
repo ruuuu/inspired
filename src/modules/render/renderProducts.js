@@ -10,7 +10,7 @@ import { getFavorite } from "../controllers/favoriteController";
 
 
 export const renderProducts = async (title, params) => {    //  ставим async тк ув ыукни есть запрос на сервер
-    console.log('params ', params);                         // { gender: 'men' } или  { gender: 'men' ,  category: 'pijams} или  { gender: 'men' ,  category: 'pijams,  page: 2}
+    //console.log('params ', params);                         // { gender: 'men' } или  { gender: 'men' ,  category: 'pijams} или  { gender: 'men' ,  category: 'pijams,  page: 2}
 
 
     products.textContent = '';                              // очищаем
@@ -84,6 +84,7 @@ export const renderProducts = async (title, params) => {    //  ставим asy
                             <div class="product__row">
                                 <p class="product__price">руб ${product.price} </p>
                                  <!-- aria-label показывает что делает кнопка, полезно для слепых людей -->
+                                 <!-- max.includes(elem) проверяет есть ли в массиве элемент elem -->
                                 <button class="product__btn-favorite favorite ${favoriteList.includes(product.id) ? 'favorite--active' : ''}" data-id="${product.id}"   aria-label="Добавить товар в избранное">
                                 </button>
                             </div> 
@@ -97,7 +98,7 @@ export const renderProducts = async (title, params) => {    //  ставим asy
             {
                 parent: article,
                 appends: product.colors.map((colorId, i) => {                        // product.colors = [1,2,5]
-                    const color = DATA.colors.find((item) => item.id == colorId);                               //  переберет массив и найдет первый  item, подоход под условие. DATA.colors = [{id,title,code},{},{}]
+                    const color = DATA.colors.find((item) => item.id == colorId);                               // find  переберет массив и найдет первый  item, подоход под условие. DATA.colors = [{id,title,code},{},{}]
                     //console.log('color after find', color);
                     return createElement('li', { className: `color color--${color.title} ${i ? '' : 'color--check'}` });
                 })   // appends: [li, li, li, li]

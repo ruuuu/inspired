@@ -72,6 +72,21 @@ iframe {
 }
 
 
+
+fieldset {
+
+      padding: 0;
+      margin: 0;
+      border: none;
+}
+
+
+
+.input-hide {
+      // для радиокнпоок
+      appearance: none;
+}
+
 /*
     Пример контейнера
     

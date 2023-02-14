@@ -1,8 +1,7 @@
 import { createElement } from "./utils/createElement";
+// добавление стилей <style> радиокнопкам в <head>: 
 
-
-
-export const createCssColors = (colors) => {        // colors = [ {id, color, title:black}, {id, color, title:white}, {} ]
+export const createCssColors = (colors) => {        // colors = [ {id:, color:, title: black},  {id:, color:, title: white}, {} ]
 
     let style = createElement('style');
 
@@ -18,5 +17,4 @@ export const createCssColors = (colors) => {        // colors = [ {id, color, ti
 
 
     document.head.append(style);  // <head><style> </style></head>
-
 }; 

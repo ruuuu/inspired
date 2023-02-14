@@ -9,7 +9,7 @@ import { DATA } from "../const";
 
 
 export const categoryPageController = (routerData) => {
-    console.log('routerData in categoryPageController ', routerData);
+    //console.log('routerData in categoryPageController ', routerData);
 
     if (!Object.keys(DATA.navigation).includes(gender)) {    // Object.keys(DATA.navigation) получим свойтсва объекта в виде массива ['men', 'women']
         return;

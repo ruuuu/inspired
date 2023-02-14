@@ -3,7 +3,6 @@
       width: 18px;
       height: 18px;
       display: block;
-      border: 1px solid $light-gray;
       border-radius: 50%;
 
 
@@ -24,6 +23,18 @@
       }
 
 
+      //  для span(обводка у  checked радиокнопки) котрый сразу идет после input: :
+      &__input:checked+&__check {
+
+            position: absolute; // относительно  .color
+            inset: 0; // top:0; left:0; right:0;  bottom:0
+            display: block;
+            border: 0.4px solid #929292;
+            border-radius: 50%;
+      }
+
+
+
       // эти стили сделаем через JS:
       // &--red:after {
       //       background-color: red;
@@ -36,4 +47,6 @@
       // &--black:after {
       //       background-color: black;
       // }
+
+
 }

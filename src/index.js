@@ -22,6 +22,8 @@ const init = async () => {
         DATA.navigation = await getData(`${API_URL}/api/categories`);            // добавили объекту  свойство navigation
         DATA.colors = await getData(`${API_URL}/api/colors`);                    // добавили объекту  свойство  colors,  полчаем массив цветов [ {id,title,code}, {id,title,code}, {}, {} ]
         //console.log('DATA.navigation ', DATA.navigation);                      // DATA.navigation = { women: {title: , list: },    men: {title: , list: } }
+        console.log('DATA.colors ', DATA.colors);                                // [ {id: 1, title: 'black', code: '#000000'},  { id: 2, title: 'white', code: '#ffffff' },  {id: 3, title: 'red', code: '#dd0808'} ]
+
 
         createCssColors(DATA.colors);
 
@@ -53,8 +55,8 @@ const init = async () => {
         router.on('/:gender/:category', categoryPageController);              // у gender и category ставим двоеточие, чобы получать их значения.  Когда  находимся на станице /:gender/:category, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
 
 
-        // переход на  карточку товара:
-        router.on('/product/:id', cardController);                             // у id  стаивм двоеточие, чтобы его получать
+        // переход на страницу товара:
+        router.on('/product/:id', cardController);                             // у id  стаивм двоеточие, чтобы вставлять его значение
 
 
 
