@@ -1,14 +1,16 @@
-// добавление товара в Избранное  и рендр товраов  в Избранное:
+// добавление/удаление товара в/из Избранное  и рендр товраов на странице /favorite:
 
 import { renderProducts } from "../render/renderProducts";
 import { renderNavigation } from "../render/renderNavigation";
 import { renderHero } from "../render/renderHero";
 import { products } from "../const";
+import { renderCard } from "../render/renderCard";
+
 
 
 // Избранные товары будем хранить в localStorage
 export const getFavorite = () => {
-    return JSON.parse(localStorage.getItem('favorite') || '[]');            // достаем из локалсторидж по ключу favorite, parse  из сроки превращает в массив
+    return JSON.parse(localStorage.getItem('favorite') || '[]');            // достаем из локалсторидж по ключу favorite, parse  из строки превращает в массив: [ id, id ]
 };
 
 
@@ -43,8 +45,7 @@ const removeFavorite = (id) => {
 };
 
 
-
-products.addEventListener('click', (evt) => {               //  чтобы не навешиать обработчик на каждую иноку Избранное, навершиваем на их  родиеля, это делегирование
+export const favoriteHandler = (evt) => {
     const target = evt.target;
 
     if (target.closest('.favorite--active')) {              // есди элемет target/его родитель  имеет класс  favorite--active
@@ -53,29 +54,28 @@ products.addEventListener('click', (evt) => {               //  чтобы не 
         return;                                             // дальше код не будет выполняться
     }
 
-});
 
-
-
-
-products.addEventListener('click', (evt) => {               //  чтобы не навешиать обработчик на каждую иноку Избранное, навершиваем на их  родиеля, это делегирование
-    const target = evt.target;
-
-    if (target.closest('.favorite')) {              // есди элемет target/его родитель  имеет класс  favorite
+    if (target.closest('.favorite')) {                      // если элемет target/его родитель  имеет класс  favorite
         addFavorite(target.dataset.id);
         target.classList.add('favorite--active');
         return;                                             // дальше код не будет выполняться
     }
+};
 
-});
+// при нажатии на кнопку  В Избраное:
+products.addEventListener('click', favoriteHandler);   //  чтобы не навешиать обработчик на каждую кнпоку Избранное у картчоки товара, навершиваем на их родиеля, это делегирование
+
+
+
+
 
 
 
 
 export const favoriteController = () => {
-    renderNavigation('all');               // отрисвка меню
+    renderNavigation('all');                                    // отрисвка меню
 
-    renderHero(false);                                  // если gender = false
-
-    renderProducts('Избранное', { list: getFavorite() });    // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
+    renderHero(false);                                          // если gender = false, не отображае блок Hero
+    renderCard(false);                                          // не отображает товар
+    renderProducts('Избранное', { list: getFavorite() });       // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
 };

@@ -4,7 +4,7 @@ import { router } from "../utils/router";
 import { renderNavigation } from "../render/renderNavigation";
 import { renderHero } from "../render/renderHero";
 import { renderProducts } from "../render/renderProducts";
-
+import { renderCard } from "../render/renderCard";
 
 
 export const seachController = (form) => {
@@ -35,7 +35,7 @@ export const searchPageController = (routerData) => {
 
     renderNavigation('all');               // отрисвка меню
 
-    renderHero(false);                                  // если gender = false
-
+    renderHero(false);                                  // если gender = false, не отображает блок Hero
+    renderCard(false);                                  // не отображает товар
     renderProducts(routerData.params.value, params);    // params = { search:  , count: ,  page: } 
 };

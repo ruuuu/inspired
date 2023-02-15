@@ -1,11 +1,21 @@
-// отрисовка товара:
+// отрисовка страницы товара:
 import { card, API_URL, DATA } from "../const";
 import { createElement } from "../utils/createElement";
+import { renderCount } from "./renderCount";
+import { favoriteHandler } from "../controllers/favoriteController";
+import { getFavorite } from "../controllers/favoriteController";
 
 
-export const renderCard = ({ id, title, description, price, colors, pic, size }) => { // данные товара
 
-    console.log('товар ', { id, title, description, price, colors, pic, size });
+export const renderCard = (data) => { // данные товара
+    if(!data){          // если data нет
+        return;
+    }
+
+    
+    const { id, title, description, price, colors, pic, size } = data;          // деструктуризация(присваиваем объекту значение)
+
+    console.log('товар ', { id, title, description, price, colors, pic, size }, data);
 
     card.textContent = '';              // очишщаем
 
@@ -192,35 +202,43 @@ export const renderCard = ({ id, title, description, price, colors, pic, size })
         );
 
 
-        const count =  renderCount();
+        const count = renderCount();  // <div class="card__count count">...</div>
+
+        const addCard = createElement('button',
+            {
+                className: 'card__add-cart main-button',
+                type: 'submit',
+                textContent: 'В корзину'
+            }
+        );
 
 
-        // const cardAddBtn = createElement('button', 
-        //     {
-        //         className: 'card__add-cart main-button',
-        //     }
-                
-        // );
-
-
-        // const cardFavoriteBtn = createElement('button', 
-        //     {
-        //         className: 'card__favorite favorite',
-        //     }
-        // );
+        const favoriteBtn = createElement('button',
+            { // getFavorite
+                className: `card__favorite favorite  ${getFavorite().includes(id) ? 'favorite--active': ''}`,
+                ariaLabel: 'Добавить в избранное',
+                type: 'button'
+            },
+            {
+                cb(favorBtn) {                              // коллбэк фукнция
+                    favorBtn.dataset.id = id;               // добавили data-id кнопке Избранное
+                    favorBtn.addEventListener('click', favoriteHandler);
+                }
+            }
+        );
 
 
         createElement('div', 
-        {   
-            className: 'card__control'
-        }, 
-        {
-            parent: form,
-            appends:[ count, cardAddBtn, cardFavoriteBtn ] ,  // вставляем в div
-        }
-    );
+            {   
+                className: 'card__control'
+            }, 
+            {
+                parent: form,
+                appends:[ count, addCard, favoriteBtn ] ,  // вставляем в этот div элементы  count, cardAddBtn, cardFavoriteBtn
+            }
+        );
 
-
+            
 
 
 };

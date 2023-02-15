@@ -4,7 +4,7 @@ import { renderNavigation } from "../render/renderNavigation";
 import { renderHero } from "../render/renderHero";
 import { renderProducts } from "../render/renderProducts";
 import { DATA } from "../const";
-
+import { renderCard } from "../render/renderCard";
 
 
 
@@ -28,8 +28,8 @@ export const categoryPageController = (routerData) => {
 
     renderNavigation(gender, category);                 // отрисвка меню
 
-    renderHero(false);                                  // нео тображает блок Hero
-
+    renderHero(false);                                  // не отображает блок Hero
+    renderCard(false);                                  // не отображает товар
     renderProducts(title, params);
 
 };
