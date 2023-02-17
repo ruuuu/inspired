@@ -4,20 +4,24 @@ import { createElement } from "../utils/createElement";
 import { renderCount } from "./renderCount";
 import { favoriteHandler } from "../controllers/favoriteController";
 import { getFavorite } from "../controllers/favoriteController";
+import { addProductCart } from "../controllers/cartController";
 
 
 
-export const renderCard = (data) => { // данные товара
-    if(!data){          // если data нет
+
+export const renderCard = (data) => {               // данные товара { id, title, description, price, colors, pic, size }
+    card.textContent = '';              // очишщаем
+
+    if (!data) {          // если data нет
         return;
     }
 
-    
+
     const { id, title, description, price, colors, pic, size } = data;          // деструктуризация(присваиваем объекту значение)
 
     console.log('товар ', { id, title, description, price, colors, pic, size }, data);
 
-    card.textContent = '';              // очишщаем
+
 
     const container = createElement('div',
         {
@@ -47,7 +51,37 @@ export const renderCard = (data) => { // данные товара
             id: 'order'
         },
         {
-            parent: container
+            parent: container,
+            cb(elemForm) {           //   вызовется коллбэк
+                elemForm.addEventListener('submit', (evt) => {      // событие отправки данных
+                    evt.preventDefault();                           // чтоб стр не презагружалась
+                    let required = false;
+
+                    const { color, size, count } = elemForm;
+                    console.log('color, size, count ', { color, size, count });
+
+                    if (color.value && size.value && count.value) {              // если поля заполнены
+
+                        const formData = new FormData(elemForm);                        //  объект котрый вытаскиает значения атрибута name  из элементов формы, передаем форму
+                        const product = Object.fromEntries(formData);                   // { id: '8888866276',   color: 'black',   size: 'XL',   count: '1' } , навания свойств взяты из атибутв name у полей
+                        addProductCart(product);                                        // добавление товара в Корзину 
+                    }
+
+                    const p = createElement('p',
+                        {
+                            className: 'card__alert',
+                            textContent: size.value ? color.value ? count.value ? 'Что то пошло не так' : 'Количество некорректное' : 'Выберите цвет' : 'Выберите размер'
+                        },
+                        {
+                            parent: form,
+                            cb(p) {
+                                setTimeout(() => {
+                                    p.remove();                             // удаляем элемент <p></p> через 3 с
+                                }, 3000);
+                            }
+                        });
+                });
+            }
         }
     );
 
@@ -109,7 +143,6 @@ export const renderCard = (data) => { // данные товара
                             type: 'radio',
                             name: 'color',
                             value: color.title,
-                            require: true,
                             checked: !i             // любое чсило кроме 0 при переводе  в булево, будет true
                         },
                         {
@@ -170,7 +203,6 @@ export const renderCard = (data) => { // данные товара
                             type: 'radio',
                             name: 'size',
                             value: elem,
-                            require: true
                         },
                         {
                             parent: label
@@ -190,55 +222,56 @@ export const renderCard = (data) => { // данные товара
 
                 });
 
-                }
-             }
-        );
+            }
+        }
+    );
 
 
-        form.insertAdjacentHTML( 'beforeend', `
+    form.insertAdjacentHTML('beforeend', `
             <p class="card__subtitle card__description-title">Описание</p>
             <p class="card__description-text">${description}</p>
         `
-        );
+    );
 
 
-        const count = renderCount();  // <div class="card__count count">...</div>
+    const count = renderCount();  // <div class="card__count count">...</div>
 
-        const addCard = createElement('button',
-            {
-                className: 'card__add-cart main-button',
-                type: 'submit',
-                textContent: 'В корзину'
+    const addCard = createElement('button',
+        {
+            className: 'card__add-cart main-button',
+            type: 'submit',
+            textContent: 'В корзину'
+        }
+    );
+
+
+    // кнпока Избранное:
+    const favoriteBtn = createElement('button',
+        { // getFavorite
+            className: `card__favorite favorite  ${getFavorite().includes(id) ? 'favorite--active' : ''}`,
+            ariaLabel: 'Добавить в избранное',
+            type: 'button'
+        },
+        {
+            cb(favorBtn) {                              // коллбэк фукнция
+                favorBtn.dataset.id = id;               // добавили data-id кнопке Избранное
+                favorBtn.addEventListener('click', favoriteHandler);
             }
-        );
+        }
+    );
 
 
-        const favoriteBtn = createElement('button',
-            { // getFavorite
-                className: `card__favorite favorite  ${getFavorite().includes(id) ? 'favorite--active': ''}`,
-                ariaLabel: 'Добавить в избранное',
-                type: 'button'
-            },
-            {
-                cb(favorBtn) {                              // коллбэк фукнция
-                    favorBtn.dataset.id = id;               // добавили data-id кнопке Избранное
-                    favorBtn.addEventListener('click', favoriteHandler);
-                }
-            }
-        );
+    createElement('div',
+        {
+            className: 'card__control'
+        },
+        {
+            parent: form,
+            appends: [count, addCard, favoriteBtn],  // вставляем в этот div элементы  count, cardAddBtn, cardFavoriteBtn
+        }
+    );
 
 
-        createElement('div', 
-            {   
-                className: 'card__control'
-            }, 
-            {
-                parent: form,
-                appends:[ count, addCard, favoriteBtn ] ,  // вставляем в этот div элементы  count, cardAddBtn, cardFavoriteBtn
-            }
-        );
-
-            
 
 
 };
@@ -261,26 +294,3 @@ export const renderCard = (data) => { // данные товара
 
 
 
-
-
-
-
-
-//      <form class="card__content" id="order">
-    
-
-   
-
-    //      
-
-   
-
-    //      <div class="card__control">
-    //         
-
-    //          <button class="card__add-cart main-button" type="submit">В корзину</button>
-    //          <button class="card__favorite favorite" aria-label="Добавить в избранное" type="button"
-    //              data-id="321654"></button>
-    //      </div>
-//  </form>
-// </div>
