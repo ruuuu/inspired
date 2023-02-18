@@ -73,7 +73,7 @@ products.addEventListener('click', favoriteHandler);   //  чтобы не на�
 
 
 export const favoriteController = () => {
-    renderNavigation('all');                                    // отрисвка меню
+    renderNavigation('all');                                    // отрисвка меню, all то есть оба пола
 
     renderHero(false);                                          // если gender = false, не отображае блок Hero
     renderCard(false);                                          // не отображает товар

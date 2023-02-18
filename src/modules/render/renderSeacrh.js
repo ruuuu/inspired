@@ -22,21 +22,21 @@ const container = createElement('div',
 );
 
 
-// фрома поиска
+// форма поиска:
 export const form = createElement('form',
     {
         className: 'search__form'
     },
     {
         parent: container,
-        cb: seachController  // вешаем обработчик события на форму поиска, ри нажатии на найти вызовется seachController()
+        cb: seachController  // вешаем обработчик события на форму поиска, при нажатии на Найти, вызовется seachController(form)
     }
 );
 
 
 createElement('input',
     {
-        className: 'search__input', // <input type="name" name="search"> - поле поиска
+        className: 'search__input', // <input type="search" name="search" placeholder="Найти"> - поле поиска
         type: 'search',
         name: 'search',
         placeholder: 'Найти'
@@ -50,7 +50,7 @@ createElement('input',
 createElement('button',
     {
         className: 'search__btn',
-        type: 'submit', // <button type="submit">
+        type: 'submit',             // <button type="submit">
         textContent: 'Найти'
     },
     {

@@ -42,12 +42,12 @@ const init = async () => {
 
 
         // поиск:
-        router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController
+        router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController(routerData)
 
 
 
-        // Избранное:
-        router.on('favorite', favoriteController);   // когда наъодимся на станице favorite, вызоветс фукнция favoriteController
+        // страница Избранное:
+        router.on('favorite', favoriteController);   // когда наъодимся на станице favorite, вызоветс фукнция favoriteController()
 
 
 

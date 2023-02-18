@@ -1,6 +1,6 @@
 export const DATA = {};                     // в init() заполняем 
 export const API_URL = 'http://localhost:8024';
-export const COUNT_PAGINATION = 3;  // число отображаемых квадратиков(страниц)
+export const COUNT_PAGINATION = 3;  // число отображаемых квадратиков(страниц) на странице
 
 
 

@@ -1,0 +1,61 @@
+.pagination {
+
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: max-content;
+      margin: 0 auto;
+      padding-top: 40px;
+
+
+      &__list {
+            display: flex;
+            gap: 8px;
+            padding-top: 3px;
+            padding-bottom: 6px;
+      }
+
+
+      &__link {
+            // a
+            position: relative;
+            width: 16px;
+            font-size: 14px;
+            line-height: 17px;
+            color: $gray;
+
+            &:after {
+                  //псевдоэлемент - нижнее подчеркивание 
+                  content: '';
+                  position: absolute;
+                  display: block;
+                  left: 0;
+                  right: 0;
+                  bottom: -6px;
+
+                  height: 1px;
+                  background-color: transparent;
+                  padding-bottom: 10px;
+            }
+
+
+            &--active {
+                  color: $main-color;
+
+                  &:after {
+                        background-color: black;
+                  }
+            }
+      }
+
+
+      &__arrow {
+            color: $main-color;
+
+            &--disabled {
+                  color: $gray;
+                  pointer-events: none; // чтобы кнопка дизейблилась!!!
+            }
+      }
+
+}

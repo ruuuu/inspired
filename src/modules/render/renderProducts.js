@@ -10,13 +10,14 @@ import { getFavorite } from "../controllers/favoriteController";
 
 
 export const renderProducts = async (title, params) => {    //  ставим async тк ув ыукни есть запрос на сервер
-    //console.log('params ', params);                         // { gender: 'men' } или  { gender: 'men' ,  category: 'pijams} или  { gender: 'men' ,  category: 'pijams,  page: 2}
+    console.log('params from renderProducts ', params);                         // { gender: 'men' } или  { gender: 'men' ,  category: 'pijams} или  { gender: 'men' ,  category: 'pijams,  page: 2}
 
 
     products.textContent = '';                              // очищаем
 
 
     const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
+    console.log('data from server ', data);
 
     const goods = Array.isArray(data) ? data : data.goods;   // ессли data это массив, а не объект
 
@@ -24,7 +25,6 @@ export const renderProducts = async (title, params) => {    //  ставим asy
     const container = createElement('div', { className: 'container goods__container' }, { parent: products });
 
     const titleElem = createElement('h2', { className: 'goods__title', textContent: title }, { parent: container });
-
 
     const list = createElement('ul', { className: 'goods__list' }, { parent: container });
 
@@ -42,10 +42,11 @@ export const renderProducts = async (title, params) => {    //  ставим asy
 
 
         if (!data.totalCount) {
-            createElement('p', {
-                className: 'goods__warning',
-                textContent: 'По вашему запросу ничегоь не найдено'
-            },
+            createElement('p',
+                {
+                    className: 'goods__warning',
+                    textContent: 'По вашему запросу ничего не найдено'
+                },
                 {
                     parent: container
                 });
@@ -57,7 +58,6 @@ export const renderProducts = async (title, params) => {    //  ставим asy
 
 
     const favoriteList = getFavorite(); // список избранных товаров(из localStoridge)
-
 
 
     const listCard = goods.map((product) => {    // перебираем [{}, {}, {}]
@@ -109,8 +109,11 @@ export const renderProducts = async (title, params) => {    //  ставим asy
     });  // map
 
 
+    console.log('data.pages ', data.pages);
+    //console.log('data.page '.data.page);
 
-    if (data.pages && data.pages > 1) { // рисуем  кнопки пагинации
+    if (data.pages && data.pages > 1) {         // рисуем  кнопки пагинации
+
         const pagination = createElement('div',
             {
                 className: 'goods__pagination pagination'
@@ -118,7 +121,6 @@ export const renderProducts = async (title, params) => {    //  ставим asy
             {
                 parent: container
             }
-
         );
 
         renderPagination(pagination, data.page, data.pages, COUNT_PAGINATION);  // отрисовка пагинации

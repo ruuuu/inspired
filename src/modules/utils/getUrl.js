@@ -23,7 +23,4 @@ export const getUrl = (params) => {         // params = {  search:  ,  page: ,  
     console.log('url ', url)
 
     return url;
-
-
-
 };
