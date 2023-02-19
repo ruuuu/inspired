@@ -5,6 +5,9 @@ import { renderHero } from "../render/renderHero";
 import { renderProducts } from "../render/renderProducts";
 import { DATA } from "../const";
 import { renderCard } from "../render/renderCard";
+import { renderCart } from "../render/renderCart";
+import { renderOrder } from "../render/renderOrder";
+
 
 
 
@@ -27,10 +30,10 @@ export const categoryPageController = (routerData) => {
     const title = DATA.navigation[gender].list.find((item) => item.slug === category).title;            // метод find ищет в массиве [ {slug:, title: }, {}, {} ] первый элемент удовлетвор условию, и возарщает его. И берем у него свойство title
 
 
-    renderNavigation(gender, category);                 // отрисвка меню
-
-    renderHero(false);                                  // не отображает блок Hero
-    renderCard(false);                                  // не отображает страницу товара
-    renderProducts(title, params);
-
+    renderNavigation({ gender, category, render: true });                   // отрисвка меню
+    renderHero({ gender, render: false });                                  // не отображает блок Hero
+    renderCard({ render: false });                                          // не отображает страницу товара
+    renderProducts({ title, params, render: true });
+    renderCart({ gender: false });           // не отображаем  корзину
+    renderOrder({ gender: false });          //  не отображае форму заказа
 };

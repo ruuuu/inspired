@@ -12,7 +12,7 @@ import { categoryPageController } from './modules/controllers/categoryPageContro
 import { searchPageController } from './modules/controllers/seachController';
 import { favoriteController } from './modules/controllers/favoriteController';
 import { cardController } from './modules/controllers/cardController';
-
+import { cartController } from './modules/controllers/cartController';
 
 
 
@@ -41,14 +41,15 @@ const init = async () => {
 
 
 
-        // поиск:
-        router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController(routerData)
+        router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)
+            mainPageController('women');
+        });
 
 
 
-        // страница Избранное:
-        router.on('favorite', favoriteController);   // когда наъодимся на станице favorite, вызоветс фукнция favoriteController()
-
+        router.on('men', () => {             // если находимся на  станице http://localhost:3000/#/men
+            mainPageController('men');
+        });
 
 
         // фильтрация по категориям:
@@ -59,16 +60,16 @@ const init = async () => {
         router.on('/product/:id', cardController);                             // у id  стаивм двоеточие, чтобы вставлять его значение
 
 
+        //при нажатии на иконку корзины в левом верхнем меню:
+        router.on('cart', cartController);   // когда наъодимся на станице cart вызоветс фукнция cartController
 
-        router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)
-            mainPageController('women');
-        });
+        // поиск:
+        router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController(routerData)
 
 
+        // страница Избранное:
+        router.on('favorite', favoriteController);   // когда наъодимся на станице favorite, вызоветс фукнция favoriteController()
 
-        router.on('men', () => {             // если находимся на  станице http://localhost:3000/#/men
-            mainPageController('men');
-        });
 
 
         // setTimeout(() => {

@@ -9,10 +9,10 @@ import { addProductCart } from "../controllers/cartController";
 
 
 
-export const renderCard = (data) => {               // данные товара { id, title, description, price, colors, pic, size }
+export const renderCard = ({ data, render }) => {               // данные товара { id, title, description, price, colors, pic, size }
     card.textContent = '';              // очишщаем
 
-    if (!data) {          // если data нет
+    if (!render) {          // если render нет
         return;
     }
 

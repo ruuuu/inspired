@@ -1,4 +1,4 @@
-// добавление/удаление товара в/из Избранное  и рендр товраов на странице /favorite:
+// добавление/удаление товара в/из Избранное  и рендер товраов на странице /favorite:
 
 import { renderProducts } from "../render/renderProducts";
 import { renderNavigation } from "../render/renderNavigation";
@@ -45,6 +45,7 @@ const removeFavorite = (id) => {
 };
 
 
+
 export const favoriteHandler = (evt) => {
     const target = evt.target;
 
@@ -77,5 +78,8 @@ export const favoriteController = () => {
 
     renderHero(false);                                          // если gender = false, не отображае блок Hero
     renderCard(false);                                          // не отображает товар
-    renderProducts('Избранное', { list: getFavorite() });       // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
+    renderProducts({ title, params, render: true });       // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
+
+    renderCart({ gender: false });           // не отображаем  корзину
+    renderOrder({ gender: false });          //  не отображае форму заказа
 };

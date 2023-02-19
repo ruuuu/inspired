@@ -7,11 +7,12 @@ let flag = false;                               // управляет перер
 let oldGender = 'women';                        // нач значение
 
 
-export const renderNavigation = (gender, category) => {               // gender='men'/'women'
+export const renderNavigation = ({ gender, category, render }) => {               // gender='men'/'women'
 
 
-    if (!gender) {                          // если нет gender
+    if (!render) {                          // если нет render
         navigation.style.display = 'none';
+        return;
     }
     else {
         navigation.style.display = '';           // значение по умолчаию(меню  отображаеся)

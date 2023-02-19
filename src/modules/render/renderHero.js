@@ -4,11 +4,13 @@ import { createElement } from "../utils/createElement";
 import { TITLE } from "../const";
 import { hero } from "../const";
 
-export const renderHero = (gender) => {               // gender = men/women
 
 
 
-    if (!gender) {
+export const renderHero = ({ gender, render }) => {               // gender = men/women
+
+
+    if (!render) {
         hero.style.display = 'none';
         return;                                         // дальше функция не будет выполнться
     }
