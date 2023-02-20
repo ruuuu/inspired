@@ -1,13 +1,13 @@
-// на станице товара рендерим  число товаров:
+// на станице товара/корзина, рендерим кнопкуи=/- и  число товаров:
 import { createElement } from "../utils/createElement";
 import { countController } from "../controllers/countController";
 
 
-export const renderCount = () => {
+export const renderCount = (count, className, returnCount = () => { }) => {  // count-число товара
 
     const control = createElement('div',
         {
-            className: 'card__count count'
+            className: `${className} count`
         }
     );
 
@@ -27,7 +27,7 @@ export const renderCount = () => {
     const number = createElement('span',
         {
             className: 'count__item count__number',
-            textContent: '1'
+            textContent: count
         },
         {
             parent: control
@@ -51,7 +51,7 @@ export const renderCount = () => {
         {
             type: 'hidden',
             name: 'count',
-            value: '1'
+            value: count
         },
         {
             parent: control
@@ -59,7 +59,7 @@ export const renderCount = () => {
     );
 
 
-    countController(minus, number, plus, input);
+    countController(minus, number, plus, input, returnCount);   // навешиваем обработчик на кнопку +/- ,  returnCount() вызывается функция
 
     return control;  // <div class="card__count count">...</div>
 

@@ -234,8 +234,9 @@ export const renderCard = ({ data, render }) => {               // данные 
     );
 
 
-    const count = renderCount();  // <div class="card__count count">...</div>
+    const count = renderCount(1, 'card__count');  // рисует кнопки +/- и число товара  
 
+    // кнопка "В корзину":
     const addCard = createElement('button',
         {
             className: 'card__add-cart main-button',
@@ -267,12 +268,9 @@ export const renderCard = ({ data, render }) => {               // данные 
         },
         {
             parent: form,
-            appends: [count, addCard, favoriteBtn],  // вставляем в этот div элементы  count, cardAddBtn, cardFavoriteBtn
+            appends: [count, addCard, favoriteBtn],  // вставляем в этот div элементы:  count, cardAddBtn, cardFavoriteBtn
         }
     );
-
-
-
 
 };
 

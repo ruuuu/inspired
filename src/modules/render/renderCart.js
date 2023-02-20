@@ -1,9 +1,13 @@
-// отрисовка Корзины:
+// отрисовка Корзины http://localhost:3000/#/cart:
 import { cart } from "../const";
 import { createElement } from "../utils/createElement";
 import { getCart } from "../controllers/cartController";
 import { getData } from "../getData";
 import { API_URL } from "../const";
+import { countController } from "../controllers/countController";
+import { renderCount } from "./renderCount";
+import { removeCart } from "../controllers/cartController";
+import { addProductCart } from "../controllers/cartController";
 
 
 export const renderCart = ({ render }) => {
@@ -36,11 +40,11 @@ export const renderCart = ({ render }) => {
 
 
     getCart().forEach(async (cartProduct) => {  // тк в функции идет запрос на сервер, пэтому ставим async
-        console.log('cartProduct ', cartProduct);
+        //console.log('cartProduct ', cartProduct);
 
         const cartItem = await getData(`${API_URL}/api/goods/${cartProduct.id}`);  // товар {id: , category: , gender: , description:  , title: , count: , size: , price: }
-        console.log('cartItem ', cartItem);
-        //  мой спосьоб:
+        //console.log('cartItem ', cartItem);
+        //  мой способ:
         //         cartList.innerHTML += `
         //                 <li class="cart__item">
         //                     <article class="item">
@@ -81,12 +85,74 @@ export const renderCart = ({ render }) => {
         //         `;
 
         // др способ:
+
         const li = createElement('li',
-
             {
+                className: 'cart__item'
+            },
+            {
+                parent: cartList
+            }
+        );
 
-            });
+        const article = createElement('article',
+            {
+                className: 'item'
+            },
+            {
+                parent: li
+            }
+        );
 
+        article.insertAdjacentHTML('beforeend', `
+            <img src="${API_URL}/${cartItem.pic}" alt="${cartItem.description}" class="item__image"> 
+
+            <div class="item__content">
+                <h3 class="item__title">${cartItem.title}</h3>
+                <p class="item__price">руб ${cartItem.price}</p>
+
+                <div class="item__vendor-code">
+                    <span class="item__subtitle">Артикул</span>
+                    <span class="item__id">${cartItem.id}</span>
+                </div>
+            </div>
+
+          <div class="item__prop">
+            <div class="item__color">
+                    <p class="item__subtitle item__color-title">Цвет</p>
+                    <div class="item__color-item color color--${cartProduct.color} color--check"></div>
+                </div>
+
+                <div class="item__size">
+                    <p class="item__subtitle item__size-title">Размер</p>
+                    <div class="item__size-item size">${cartProduct.size}</div>
+                </div>
+            </div>
+        `);
+
+        createElement('button',
+            {
+                className: 'item__del',
+                ariaLabel: 'Удалить товар из корзины'
+            },
+            {
+                parent: article,
+                cb(buttonDel) {                             // коллбэк
+                    buttonDel.addEventListener('click', () => {
+                        const isRemove = removeCart(cartProduct);  // удален ли товар из корзины
+                        if (isRemove) {
+                            li.remove();        // удлаляем элемент <li></li>
+                        }
+                    });
+                }
+            }
+        );
+
+        const countBlock = renderCount(cartProduct.count, 'item__count', (count) => {  //  рисует кнопки +/- и число товара
+            cartProduct.count = count;
+            addProductCart(cartProduct, true);
+        });
+        article.append(countBlock);
     });
 
 
@@ -98,7 +164,6 @@ export const renderCart = ({ render }) => {
         {
             parent: container
         }
-
     );
 
 
@@ -135,79 +200,40 @@ export const renderCart = ({ render }) => {
 //     <ul class="cart__list">
 //         <li class="cart__item">
 //             <article class="item">
-//                  <img src="" alt="Пижама со штанами шелковая" class="item__image"> -->
+//                 <img src="" alt="Пижама со штанами шелковая" class="item__image"> 
 
-            //  <div class="item__content">
-            //     <h3 class="item__title">Пижама со штанами шелковая</h3>
-            //     <p class="item__price">руб 6999</p>
+                //  <div class="item__content">
+                //     <h3 class="item__title">Пижама со штанами шелковая</h3>
+                //     <p class="item__price">руб 6999</p>
 
-            //     <div class="item__vendor-code">
-            //         <span class="item__subtitle">Артикул</span>
-            //         <span class="item__id">089083</span>
-            //     </div>
-//              </div> -->
+                //     <div class="item__vendor-code">
+                //         <span class="item__subtitle">Артикул</span>
+                //         <span class="item__id">089083</span>
+                //     </div>
+    //              </div>
 
-            //  <div class="item__prop">
-            //     <div class="item__color">
-            //         <p class="item__subtitle item__color-title">Цвет</p>
-            //         <div class="item__color-item color color_black color_check"></div>
-            //     </div>
+                //  <div class="item__prop">
+                //     <div class="item__color">
+                //         <p class="item__subtitle item__color-title">Цвет</p>
+                //         <div class="item__color-item color color_black color_check"></div>
+                //     </div>
 
-            //     <div class="item__size">
-            //         <p class="item__subtitle item__size-title">Размер</p>
-            //         <div class="item__size-item size">XS</div>
-            //     </div>
-            // </div>
+                //     <div class="item__size">
+                //         <p class="item__subtitle item__size-title">Размер</p>
+                //         <div class="item__size-item size">XS</div>
+                //     </div>
+                // </div>
 //
 //              <button class="item__del" aria-label="Удалить товар из корзины"></button>
 
-            // <div class="count item__count">
-            //     <button class="count__item count__minus">-</button>
-            //     <span class="count__item count__number">1</span>
-            //     <button class="count__item count__plus">+</button>
-            //     <input type="hidden" name="count" value="1">
-            // </div>
+                // <div class="count item__count">
+                //     <button class="count__item count__minus">-</button>
+                //     <span class="count__item count__number">1</span>
+                //     <button class="count__item count__plus">+</button>
+                //     <input type="hidden" name="count" value="1"> это поле нужно чтобы отправлять его значение на сервер
+                // </div>
 //         </article>
 //        </li> 
-
-
-//          <li class="cart__item">
-//              <article class="item">
-//         
-//              <!-- <img src="" alt="Бюстгальтер-Балконет Prague Full Cover" class="item__image"> -->
-//             
-//              <div class="item__content">
-//                  <h3 class="item__title">Бюстгальтер-Балконет Prague Full Cover</h3>
-//                  <p class="item__price">руб 2599</p>
-
-//                  <div class="item__vendor-code">
-//                      <span class="item__subtitle">Артикул</span>
-//                      <span class="item__id">084375</span>
-//                  </div>
-//              </div> -->
-
-//           <div class="item__prop">
-//              <div class="item__color">
-//                  <p class="item__subtitle item__color-title">Цвет</p>
-//                  <div class="item__color-item color color_black color_check"></div>
-//              </div>
-
-//              <div class="item__size">
-//                  <p class="item__subtitle item__size-title">Размер</p>
-//                  <div class="item__size-item size">M</div>
-//              </div>
-//          </div> 
-
-//       <button class="item__del" aria-label="Удалить товар из корзины"></button>
-
-    //      <div class="count item__count">
-    //          <button class="count__item count__minus">-</button>
-    //          <span class="count__item count__number">1</span>
-    //          <button class="count__item count__plus">+</button>
-    //          <input type="hidden" name="count" value="1">
-    //      </div>
-//      </article>
-//   </li>
 // </ul> 
 
 //  <div class="cart__total">

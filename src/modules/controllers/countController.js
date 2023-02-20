@@ -1,7 +1,7 @@
 // считает число товара (на станице товара) и для Корзина:
 
 
-export const countController = (minus, number, plus, input) => {
+export const countController = (minus, number, plus, input, returnCount) => {  // передаем функцию returnCount()
 
     let n = +input.value;           // приводим строку к числу
 
@@ -10,6 +10,7 @@ export const countController = (minus, number, plus, input) => {
             n -= 1;
             number.textContent = n;
             input.value = n;
+            returnCount(n);
         }
 
     });
@@ -19,6 +20,7 @@ export const countController = (minus, number, plus, input) => {
         n += 1;
         number.textContent = n;
         input.value = n;
+        returnCount(n);
     });
 
 };
