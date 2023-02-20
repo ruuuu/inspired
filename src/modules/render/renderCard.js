@@ -55,22 +55,22 @@ export const renderCard = ({ data, render }) => {               // данные 
             cb(elemForm) {           //   вызовется коллбэк
                 elemForm.addEventListener('submit', (evt) => {      // событие отправки данных
                     evt.preventDefault();                           // чтоб стр не презагружалась
-                    let required = false;
 
-                    const { color, size, count } = elemForm;
-                    console.log('color, size, count ', { color, size, count });
+                    const formData = new FormData(elemForm);                        //  объект котрый вытаскиает значения атрибута name  из элементов формы, передаем форму
+                    const product = Object.fromEntries(formData);
+                    //console.log('product ', product);                               // {id: '3872463683', color: 'red', size: '42-43', count: '3'}
 
-                    if (color.value && size.value && count.value) {              // если поля заполнены
+                    if (product.color && product.size && product.count) {              // если поля заполнены
 
-                        const formData = new FormData(elemForm);                        //  объект котрый вытаскиает значения атрибута name  из элементов формы, передаем форму
-                        const product = Object.fromEntries(formData);                   // { id: '8888866276',   color: 'black',   size: 'XL',   count: '1' } , навания свойств взяты из атибутв name у полей
-                        addProductCart(product);                                        // добавление товара в Корзину 
+                        // { id: '8888866276',   color: 'black',   size: 'XL',   count: '1' } , навания свойств взяты из атибутв name у полей
+                        addProductCart(product); // product = {} -товар                                   // добавление товара в Корзину 
+                        return;
                     }
 
                     const p = createElement('p',
                         {
                             className: 'card__alert',
-                            textContent: size.value ? color.value ? count.value ? 'Что то пошло не так' : 'Количество некорректное' : 'Выберите цвет' : 'Выберите размер'
+                            textContent: product.size ? product.color ? product.count ? 'Что то пошло не так' : 'Количество некорректное' : 'Выберите цвет' : 'Выберите размер'
                         },
                         {
                             parent: form,

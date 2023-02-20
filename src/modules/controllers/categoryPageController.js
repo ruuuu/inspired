@@ -34,6 +34,6 @@ export const categoryPageController = (routerData) => {
     renderHero({ gender, render: false });                                  // не отображает блок Hero
     renderCard({ render: false });                                          // не отображает страницу товара
     renderProducts({ title, params, render: true });
-    renderCart({ gender: false });           // не отображаем  корзину
-    renderOrder({ gender: false });          //  не отображае форму заказа
+    renderCart({ render: false });           // не отображаем  корзину
+    renderOrder({ render: false });          //  не отображае форму заказа
 };

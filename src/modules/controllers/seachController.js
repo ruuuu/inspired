@@ -5,6 +5,9 @@ import { renderNavigation } from "../render/renderNavigation";
 import { renderHero } from "../render/renderHero";
 import { renderProducts } from "../render/renderProducts";
 import { renderCard } from "../render/renderCard";
+import { renderCart } from "../render/renderCart";
+import { renderOrder } from "../render/renderOrder";
+
 
 
 export const seachController = (form) => {
@@ -33,9 +36,11 @@ export const searchPageController = (routerData) => {
         params.page = routerData.params?.page;      // объекту params добавляем свойство page
     }
 
-    renderNavigation('all');               // отрисвка меню
+    renderNavigation({ render: true, rerender: true });               // отрисвка меню
 
-    renderHero(false);                                  // если gender = false, не отображает блок Hero
-    renderCard(false);                                  // не отображает товар
-    renderProducts(routerData.params.value, params);    // params = { search:  , count: ,  page: } 
+    renderHero({ render: false });                                  // если gender = false, не отображает блок Hero
+    renderCard({ render: false });                                  // не отображает товар
+    renderProducts({ title: routerData.params.value, params, render: true });    // params = { search:  , count: ,  page: } 
+    renderCart({ render: false });           // не отображаем  корзину
+    renderOrder({ render: false });          //  не отображае форму заказа
 };

@@ -31,8 +31,8 @@ export const cardController = async (routerData) => {  // сатвим async, т
     renderHero({ render: false });                                              //  блок Hero не отображаем
     renderCard({ data, render: true });                                               // отсривока товара
     renderProducts({ title: 'Вам также может понравиться ', params: { count: 4, gender }, render: true });
-    renderCart({ gender: false });           // не отображаем  корзину
-    renderOrder({ gender: false });          //  не отображае форму заказа
+    renderCart({ render: false });           // не отображаем  корзину
+    renderOrder({ render: false });          //  не отображае форму заказа
 };
 
 

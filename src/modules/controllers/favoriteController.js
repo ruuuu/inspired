@@ -5,7 +5,8 @@ import { renderNavigation } from "../render/renderNavigation";
 import { renderHero } from "../render/renderHero";
 import { products } from "../const";
 import { renderCard } from "../render/renderCard";
-
+import { renderCart } from "../render/renderCart";
+import { renderOrder } from "../render/renderOrder";
 
 
 // Избранные товары будем хранить в localStorage
@@ -74,12 +75,12 @@ products.addEventListener('click', favoriteHandler);   //  чтобы не на�
 
 
 export const favoriteController = () => {
-    renderNavigation('all');                                    // отрисвка меню, all то есть оба пола
+    renderNavigation({ rerender: true, render: true });                                    // отрисвка меню, all то есть оба пола
 
-    renderHero(false);                                          // если gender = false, не отображае блок Hero
-    renderCard(false);                                          // не отображает товар
-    renderProducts({ title, params, render: true });       // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
+    renderHero({ render: false });                                          // если gender = false, не отображае блок Hero
+    renderCard({ render: false });                                          // не отображает товар
+    renderProducts({ title: 'Избранное', params: { list: getFavorite() }, render: true });       // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
 
-    renderCart({ gender: false });           // не отображаем  корзину
-    renderOrder({ gender: false });          //  не отображае форму заказа
+    renderCart({ render: false });           // не отображаем  корзину
+    renderOrder({ render: false });          //  не отображае форму заказа
 };

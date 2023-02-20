@@ -5,9 +5,9 @@ import { DATA, navigation } from "../const";
 
 let flag = false;                               // управляет перерисовкой меню
 let oldGender = 'women';                        // нач значение
+let oldCategory = '';
 
-
-export const renderNavigation = ({ gender, category, render }) => {               // gender='men'/'women'
+export const renderNavigation = ({ gender, category, render, rerender }) => {               // gender='men'/'women'
 
 
     if (!render) {                          // если нет render
@@ -18,19 +18,20 @@ export const renderNavigation = ({ gender, category, render }) => {             
         navigation.style.display = '';           // значение по умолчаию(меню  отображаеся)
     }
 
-    if (flag && oldGender === gender) {
+    if (flag && oldGender === gender && oldCategory === category) {
         return;                                 // дальше прогамма не выполнится
     }
 
 
-    if (gender === 'all') {
+    if (rerender) {
         gender = oldGender;
     }
 
 
-    flag = true;
-    oldGender = gender;  // при переключении gender происходит перерисовка  navigation
 
+    oldGender = gender;  // при переключении gender происходит перерисовка  navigation
+    oldCategory = category;
+    flag = true;
 
     navigation.textContent = '';     // очищем сперва, потом заполняем
 
