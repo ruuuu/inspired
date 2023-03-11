@@ -8,7 +8,7 @@ import { addProductCart } from "../controllers/cartController";
 
 
 
-
+// { data, render }  то есть деструткрируем
 export const renderCard = ({ data, render }) => {               // данные товара { id, title, description, price, colors, pic, size }
     card.textContent = '';              // очишщаем
 
@@ -52,7 +52,7 @@ export const renderCard = ({ data, render }) => {               // данные 
         },
         {
             parent: container,
-            cb(elemForm) {           //   вызовется коллбэк
+            cb(elemForm) {           // при нажатии на Оформить(станица товара), вызовется эта фукнция 
                 elemForm.addEventListener('submit', (evt) => {      // событие отправки данных
                     evt.preventDefault();                           // чтоб стр не презагружалась
 

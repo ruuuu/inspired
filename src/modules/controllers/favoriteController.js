@@ -33,6 +33,10 @@ const removeFavorite = (id) => {
     const index = favoriteList.findIndex((item) => {
         return item.id === id;
     });
+    // либо через filter:
+    // const index = favoriteList.fiter((item) => {
+    //     return item.id !== id;
+    // });
 
     console.log('index удаяемого элемента ', index);
 
@@ -75,7 +79,7 @@ products.addEventListener('click', favoriteHandler);   //  чтобы не на�
 
 
 export const favoriteController = () => {
-    renderNavigation({ rerender: true, render: true });                                    // отрисвка меню, all то есть оба пола
+    renderNavigation({ rerender: true, render: true });                                   // отрисвка меню, all то есть оба пола
 
     renderHero({ render: false });                                          // если gender = false, не отображае блок Hero
     renderCard({ render: false });                                          // не отображает товар

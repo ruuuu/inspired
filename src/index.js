@@ -34,41 +34,47 @@ const init = async () => {
         });
 
 
-
+        // роутинг:
         router.on('/', () => {          // если находимся на главной станице , то вызовется переданная фукнция
             mainPageController();
         });
 
 
-
+        // роутинг:
         router.on('women', () => {          // если находимся на  станице http://localhost:3000/#/women (если стоит #, то не будет перезагрукзки станицы)
             mainPageController('women');
         });
 
 
-
+        // роутинг:
         router.on('men', () => {             // если находимся на  станице http://localhost:3000/#/men
             mainPageController('men');
         });
 
 
+        // роутинг: 
         // фильтрация по категориям:
         router.on('/:gender/:category', categoryPageController);              // у gender и category ставим двоеточие, чобы получать их значения.  Когда  находимся на станице /:gender/:category, то вызывается categoryPage. Скобки у фукнции не ставим, иначе вызовется сразу, а не когда наступит событие
 
 
+        // роутинг: 
         // переход на страницу товара:
         router.on('/product/:id', cardController);                             // у id  стаивм двоеточие, чтобы вставлять его значение
 
 
-        //при нажатии на иконку корзины в левом верхнем меню:
-        router.on('cart', cartController);   // когда наъодимся на станице cart вызоветс фукнция cartController
+        // роутинг: 
+        // при нажатии на иконку корзины в левом верхнем меню:
+        router.on('cart', cartController);   // когда наъодимся на станице http://localhost:3000/#/cart вызоветс фукнция cartController
 
+
+        // роутинг: 
         // поиск:
-        router.on('search', searchPageController);   // когда наъодимся на станице search, вызоветс фукнция searchPageController(routerData)
+        router.on('search', searchPageController);   // когда наъодимся на станице http://localhost:3000/#/search, вызоветс фукнция searchPageController(routerData)
 
 
+        // роутинг: 
         // страница Избранное:
-        router.on('favorite', favoriteController);   // когда наъодимся на станице favorite, вызоветс фукнция favoriteController()
+        router.on('favorite', favoriteController);   // когда наъодимся на станице http://localhost:3000/#/favorite, вызоветс фукнция favoriteController()
 
 
 
@@ -82,7 +88,7 @@ const init = async () => {
         // }, 6000);
 
     }
-    catch (e) {
+    catch (e) { // если с серевра не пришли данные:
         createElement('h2', { textContent: 'Что-то пошло не так' },
             {
                 parent: document.querySelector('main'),
@@ -97,12 +103,12 @@ const init = async () => {
         router.resolve();                         //  активируем роутинг
     }
 
-}
+};
 
 
 
 
-init();             //  НАЧАЛО отсюда
+init();             //  НАЧАЛО ОТСЮДА
 
 
 

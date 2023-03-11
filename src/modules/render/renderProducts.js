@@ -9,15 +9,18 @@ import { renderPagination } from "./renderPagintion";
 import { getFavorite } from "../controllers/favoriteController";
 
 
-export const renderProducts = async ({ title, params, render }) => {    //  ставим async тк ув ыукни есть запрос на сервер
+export const renderProducts = async ({ title, params, render }) => {    //  ставим async тк у функции есть запрос на сервер
     console.log('params from renderProducts ', params);                         // { gender: 'men' } или  { gender: 'men' ,  category: 'pijams} или  { gender: 'men' ,  category: 'pijams,  page: 2}
+    products.textContent = '';                              // очищаем
 
     if (!render) {
         return;
     }
 
-    products.textContent = '';                              // очищаем
 
+    // if (!title) {
+    //     return;
+    // }
 
     const data = await getData(`${API_URL}/api/goods`, params);                   // http://localhost:8024/api/goods?gender=men&category=socks
     console.log('data from server ', data);

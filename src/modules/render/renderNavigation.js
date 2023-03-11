@@ -7,6 +7,7 @@ let flag = false;                               // управляет перер
 let oldGender = 'women';                        // нач значение
 let oldCategory = '';
 
+
 export const renderNavigation = ({ gender, category, render, rerender }) => {               // gender='men'/'women'
 
 
@@ -90,7 +91,7 @@ export const renderNavigation = ({ gender, category, render, rerender }) => {   
                         href: `#/${gender}/${item.slug}`
                     },
                     {
-                        cb(elem) {  // коллбэк
+                        cb(elem) {  // коллбэк, при нажатии на элемент меню, вызовется эта фукнция 
                             elem.addEventListener('click', () => {
                                 document.querySelector('.category__link--active')?.classList.remove('category__link--active');
                                 elem.classList.add('category__link--active');

@@ -7,7 +7,11 @@ import { renderCart } from "../render/renderCart";
 import { renderOrder } from "../render/renderOrder";
 
 
+// либо такая запись:
+//export const getCart = () => JSON.parse(localStorage.getItem('cart') || '[]');            // достаем из локалсторидж по ключу cart, JSON.parse() превращает  из строки в массив: [ id, id ]
 
+
+// либо с return:
 export const getCart = () => {
     return JSON.parse(localStorage.getItem('cart') || '[]');            // достаем из локалсторидж по ключу cart, JSON.parse() превращает  из строки в массив: [ id, id ]
 };
@@ -65,9 +69,9 @@ export const removeCart = (productCart) => {
 export const cartController = () => {
     renderNavigation({ render: false });                                    // отрисвка меню, fasle - не отображать его
     renderHero({ render: false });                                          // если gender = false, не отображае блок Hero
-    renderCard({ render: false });                                          // не отображает товар
-    renderProducts({ render: false });                                      // список товаров из Избранное, params = { list: [{}, {}, {} ]} список избраннх товаров
-    renderCart({ render: true });                                           //  рендер Корзины, тображаем
+    renderCard({ render: false });                                          // не отображает страцу товара
+    renderProducts({ render: false });                                      // список карточек товаров, params = { list: [{}, {}, {} ]} 
+    renderCart({ render: true });                                           //  рендер Корзины, отображаем
     renderOrder({ render: true });                                          // рендер Заказа, отображаем
 };
 

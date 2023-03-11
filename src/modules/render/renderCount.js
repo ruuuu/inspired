@@ -1,4 +1,4 @@
-// на станице товара/корзина, рендерим кнопкуи=/- и  число товаров:
+// на станице товара/корзина, рендерим кнопку +/- и  число товаров:
 import { createElement } from "../utils/createElement";
 import { countController } from "../controllers/countController";
 

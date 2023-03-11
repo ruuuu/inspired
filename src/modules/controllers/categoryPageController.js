@@ -23,7 +23,7 @@ export const categoryPageController = (routerData) => {
     console.log('params in  categoryPageController ', params);
 
     if (routerData.params?.page) {                              // если у routerData.params есть свойство page(условное обращение к свойству)
-        params.page = routerData.params?.page;                  // обновляем свойосв page
+        params.page = routerData.params.page;                  // обновляем свойосв page
     }
 
     console.log('params update ', params);

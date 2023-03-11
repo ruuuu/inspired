@@ -3,7 +3,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      width: max-content;
+      width: max-content; // кгла не знаешь какой ширины будет контент
       margin: 0 auto;
       padding-top: 40px;
 
@@ -40,6 +40,7 @@
 
 
             &--active {
+                  // активная ссылка
                   color: $main-color;
 
                   &:after {

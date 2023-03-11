@@ -1,4 +1,4 @@
-// отрисовка формы Заказа
+// отрисовка формы "Оформить Заказ"
 import { order } from "../const";
 import { createElement } from "../utils/createElement";
 
@@ -30,7 +30,7 @@ export const renderOrder = ({ render }) => {
         {
             parent: container,
             cb(form) {   // обработчик этой формы
-                // фукнция обработки submit
+                // фукнция обработки submit ( Оформить  заказ)
             }
         }
     );

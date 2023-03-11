@@ -3,7 +3,7 @@
 
 export const countController = (minus, number, plus, input, returnCount) => {  // передаем функцию returnCount()
 
-    let n = +input.value;           // приводим строку к числу
+    let n = +input.value;           //  + приводим строку к числу
 
     minus.addEventListener('click', () => {
         if (n > 1) {                            // чтобв  минус не уйти

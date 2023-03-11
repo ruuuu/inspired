@@ -10,6 +10,7 @@ import { removeCart } from "../controllers/cartController";
 import { addProductCart } from "../controllers/cartController";
 
 
+
 export const renderCart = ({ render }) => {
 
     cart.textContent = '';             // можно было использовать и innerHTML. textContet работате чуть быстрее
@@ -38,12 +39,12 @@ export const renderCart = ({ render }) => {
         }
     );
 
-
+    // getCart() = [{}, {}, {}] - Корзина
     getCart().forEach(async (cartProduct) => {  // тк в функции идет запрос на сервер, пэтому ставим async
         //console.log('cartProduct ', cartProduct);
 
         const cartItem = await getData(`${API_URL}/api/goods/${cartProduct.id}`);  // товар {id: , category: , gender: , description:  , title: , count: , size: , price: }
-        //console.log('cartItem ', cartItem);
+        //  console.log('cartItem ', cartItem);
         //  мой способ:
         //         cartList.innerHTML += `
         //                 <li class="cart__item">
@@ -130,18 +131,19 @@ export const renderCart = ({ render }) => {
             </div>
         `);
 
+        // кнпока Крестик:
         createElement('button',
             {
                 className: 'item__del',
-                ariaLabel: 'Удалить товар из корзины'
+                ariaLabel: 'Удалить товар из корзины'       // если на кнопке нет надписи, то нужен атрибут aria-label
             },
             {
                 parent: article,
-                cb(buttonDel) {                             // коллбэк
+                cb(buttonDel) {                             // коллбэк, при нажатии на кнопку Крестик, вызовется эта фукнция
                     buttonDel.addEventListener('click', () => {
                         const isRemove = removeCart(cartProduct);  // удален ли товар из корзины
                         if (isRemove) {
-                            li.remove();        // удлаляем элемент <li></li>
+                            li.remove();        // удаляем элемент <li></li>
                         }
                     });
                 }
@@ -185,9 +187,6 @@ export const renderCart = ({ render }) => {
         {
             parent: cartTotal
         });
-
-
-
 
 };
 

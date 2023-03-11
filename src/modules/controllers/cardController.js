@@ -22,7 +22,7 @@ export const cardController = async (routerData) => {  // сатвим async, т
     const { id } = routerData.data;                                         // деструтруизация
 
     const data = await getData(`${API_URL}/api/goods/${id}`)               // получени  товара, ставим  await тк идет обращение к серверу
-    const { gender, category } = data;
+    const { gender, category } = data;                                      // дестуртуризация
     console.log('data from cardControler ', data);                          // {}-товар
     console.log('{ gender, category } from cardControler ', { gender, category });
 

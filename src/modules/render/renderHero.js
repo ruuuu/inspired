@@ -15,9 +15,9 @@ export const renderHero = ({ gender, render }) => {               // gender = me
         return;                                         // дальше функция не будет выполнться
     }
 
-    hero.style.display = '';                           // очищаем сперва, потом заполняем
+    hero.style.display = '';
     hero.className = `hero hero__${gender}`;
-    hero.innerHTML = '';
+
 
     const container = createElement('div',
         {

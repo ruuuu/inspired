@@ -8,15 +8,15 @@ import { renderOrder } from "../render/renderOrder";
 
 
 
-export const mainPageController = (gender = 'men') => {               // по умолчанию передаем men
+export const mainPageController = (gender = 'women') => {               // по умолчанию передаем women
 
-    renderNavigation({ gender: gender, render: true });
+    renderNavigation({ gender, render: true }); // gender: gender
 
-    renderHero({ gender: gender, render: true });
+    renderHero({ gender, render: true });  // gender: gender
 
-    renderProducts({ title: 'НОВИНКИ', params: { gender: gender }, render: true });
+    renderProducts({ title: 'НОВИНКИ', params: { gender }, render: true });
     renderCard({ render: false });                                  // не отображает товар
-    renderFooter();
+    //renderFooter();
     renderCart({ render: false });           // не отображаем  корзину
     renderOrder({ render: false });          //  не отображае форму заказа
 }

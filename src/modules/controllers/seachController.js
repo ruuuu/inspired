@@ -33,12 +33,11 @@ export const searchPageController = (routerData) => {
     };
 
     if (routerData.params?.page) {                  // есл у routerData.params есть свойство page
-        params.page = routerData.params?.page;      // объекту params добавляем свойство page
+        params.page = routerData.params.page;      // объекту params добавляем свойство page
     }
 
     renderNavigation({ render: true, rerender: true });               // отрисвка меню
-
-    renderHero({ render: false });                                  // если gender = false, не отображает блок Hero
+    renderHero({ render: false });                                  // если render = false, не отображает блок Hero
     renderCard({ render: false });                                  // не отображает товар
     renderProducts({ title: routerData.params.value, params, render: true });    // params = { search:  , count: ,  page: } 
     renderCart({ render: false });           // не отображаем  корзину
