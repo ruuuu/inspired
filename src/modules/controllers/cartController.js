@@ -8,7 +8,7 @@ import { renderOrder } from "../render/renderOrder";
 import { getData } from "../getData";
 import { API_URL } from "../const";
 
-
+// Корзина
 const cartGoodsStore = {
 
     goods: [],                              // Корзина пока пуста, будем запонялть массив в методе add ниже
@@ -17,29 +17,48 @@ const cartGoodsStore = {
         if (!this.goods.some(item => item.id === product.id)) {     // если такго товара нет в Корзине. Метод вернет true, если хотя бы на одном элменет получим    т true
             this.goods.push(product);
         }
-
     },
 
     add(goods) {                            // добавляет товар/массив товаров  в Корзину
         if (Array.isArray(goods)) {          // если goods это массив
 
             goods.forEach((product) => {
-                //this.goods.push(product);
+                // this.goods.push(product);
                 this._add(product);
             });
         }
         else {
-            this._add(goods);
+            this._add(goods);  // дбавляем товар goods
         }
     },
 
-    getProduct(id) {   //  получение товара по id  из goods (Корзины)
-        return this.goods.find((item) => item.id === id);               // перебирает массив и ищет элемент подходящий под условие. и возвраает первый такой элемент
+    getProduct(id) {   //  получение товара по id  из goods (Корзины), товар = { id, price, tetule, decription, category}
+        console.log('this.goods ', this.goods)
+        console.log('this.goods.find((item) => item.id === id) ', this.goods.find((item) => item.id === id))
+        return this.goods.find((item) => item.id === id);               // перебирает массив  и  возвращает первый элемент подходящий под условие
+    }
+};
+
+
+
+export const cartTotalPrice = {
+    elemTotalPrice: null,
+    elemCount: null,
+    update() {   // обновление Корзины
+        const cartGoods = getCart();
+        this.count = cartGoods.length;
+        this.totalPrice = cartGoods.reduce((acc, item) => {
+            const product = cartGoodsStore.getProduct(item.id);  // товар {id, price, title, decription, category}
+            return product.price * item.count + acc;
+
+        }, 0);  // acc=0 - нач значнеие
+    },
+    writeTotal(elem = this.elemTotalPrice) {
+
     }
 
 
 };
-
 
 
 // либо такая запись:
@@ -106,16 +125,16 @@ export const cartController = async () => {
     // если над чтоб id были уникальные:
     //const idList = [... new Set(getCart().map((item) => item.id))];
 
-    const data = await getData(`${API_URL}/api/goods?list=${[idList]}`);    // [ {}, {}, {} ]-товары
+    const data = await getData(`${API_URL}/api/goods?list=${idList}&count=all`);    // [ {id category title, descripton, pic, gender, material }, {}, {} ]-товары
 
-    cartGoodsStore.add(data.goods);                                                    // доавляем товары в Корзину
+    cartGoodsStore.add(data.goods);                                                    // доавляем товары [{} ,{}, {}] в Корзину
 
 
     renderNavigation({ render: false });                                    // отрисвка меню, fasle - не отображать его
     renderHero({ render: false });                                          // если gender = false, не отображае блок Hero
     renderCard({ render: false });                                          // не отображает страцу товара
     renderProducts({ render: false });                                      // список карточек товаров, params = { list: [{}, {}, {} ]} 
-    renderCart({ render: true });                                           //  рендер Корзины, отображаем
+    renderCart({ render: true, cartGoodsStore });                                           //  рендер Корзины, отображаем
     renderOrder({ render: true });                                          // рендер Заказа, отображаем
 };
 

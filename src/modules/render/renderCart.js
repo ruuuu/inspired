@@ -11,7 +11,9 @@ import { addProductCart } from "../controllers/cartController";
 
 
 
-export const renderCart = ({ render }) => {
+
+export const renderCart = ({ render, cartGoodsStore }) => {
+    console.log('cartGoodsStore ', cartGoodsStore);
 
     cart.textContent = '';             // можно было использовать и innerHTML. textContet работате чуть быстрее
 
@@ -39,37 +41,38 @@ export const renderCart = ({ render }) => {
         }
     );
 
-    // getCart() = [{}, {}, {}] - Корзина
-    getCart().forEach(async (cartProduct) => {  // тк в функции идет запрос на сервер, пэтому ставим async
+    // getCart() = [ {id, color, count, size}, {}, {} ] - Корзина
+    getCart().forEach((cartProduct) => {
         //console.log('cartProduct ', cartProduct);
+        const data = cartGoodsStore.getProduct(cartProduct.id);             //  товар {id: , category: , gender: , description:  , title: , count: , size: , price: }
+        console.log('cartGoodsStore.getProduct(cartProduct.id) ', data)
 
-        const cartItem = await getData(`${API_URL}/api/goods/${cartProduct.id}`);  // товар {id: , category: , gender: , description:  , title: , count: , size: , price: }
         //  console.log('cartItem ', cartItem);
         //  мой способ:
         //         cartList.innerHTML += `
         //                 <li class="cart__item">
         //                     <article class="item">
-        //                         <img src="${API_URL}/${cartItem.pic}" alt="${cartItem.description}" class="item__image"> 
+        //                         <img src="${API_URL}/${data.pic}" alt="${data.description}" class="item__image"> 
 
         //                         <div class="item__content">
-        //                             <h3 class="item__title">${cartItem.title}</h3>
-        //                             <p class="item__price">руб ${cartItem.price}</p>
+        //                             <h3 class="item__title">${data.title}</h3>
+        //                             <p class="item__price">руб ${data.price}</p>
 
         //                             <div class="item__vendor-code">
         //                                 <span class="item__subtitle">Артикул</span>
-        //                                 <span class="item__id">${cartItem.id}</span>
+        //                                 <span class="item__id">${data.id}</span>
         //                             </div>
         //                         </div> 
 
         //                         <div class="item__prop">
         //                             <div class="item__color">
         //                                 <p class="item__subtitle item__color-title">Цвет</p>
-        //                                 <div class="item__color-item color color--${cartProduct.color} color--check"></div>
+        //                                 <div class="item__color-item color color--${data.color} color--check"></div>
         //                             </div>
 
         //                             <div class="item__size">
         //                                 <p class="item__subtitle item__size-title">Размер</p>
-        //                                 <div class="item__size-item size">${cartProduct.size}</div>
+        //                                 <div class="item__size-item size">${data.size}</div>
         //                             </div>
         //                         </div> 
 
@@ -86,7 +89,6 @@ export const renderCart = ({ render }) => {
         //         `;
 
         // др способ:
-
         const li = createElement('li',
             {
                 className: 'cart__item'
@@ -106,15 +108,15 @@ export const renderCart = ({ render }) => {
         );
 
         article.insertAdjacentHTML('beforeend', `
-            <img src="${API_URL}/${cartItem.pic}" alt="${cartItem.description}" class="item__image"> 
+            <img src="${API_URL}/${data.pic}" alt="${data.description}" class="item__image"> 
 
             <div class="item__content">
-                <h3 class="item__title">${cartItem.title}</h3>
-                <p class="item__price">руб ${cartItem.price}</p>
+                <h3 class="item__title">${data.title}</h3>
+                <p class="item__price">руб ${data.price}</p>
 
                 <div class="item__vendor-code">
                     <span class="item__subtitle">Артикул</span>
-                    <span class="item__id">${cartItem.id}</span>
+                    <span class="item__id">${data.id}</span>
                 </div>
             </div>
 
