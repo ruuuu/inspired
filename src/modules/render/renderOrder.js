@@ -88,6 +88,36 @@ const showOrderInfo = (data) => {  // data - обработанный ответ
     );
 
 
+    // const goodsList = createElement('ul',
+    //     {
+    //         className: 'modal__goods goods-list'
+    //     },
+    //     {
+    //         parent: modalBody,
+    //         appends: [...data.order.map((cartItem) => {   // map возвращет  новый массив, состоящий из элементов удовелетвор условию
+    //             const goodListItem = createElement('li',
+    //                 {
+    //                     className: 'goods-list__item'
+    //                 }
+    //             );
+    //             //const product = cartGoodsStore();
+    //             return goodListItem;
+    //         })]
+    //     }
+    // );
+
+
+    // data.order.forEach(element => {  // переьираем Корзину  [ {id, color, size, count}, {}, {}, {} ]
+    //     const li = createElement('li');
+    //     li.classList.add('goods-list__item');
+
+    //     const img = createElement('img');
+    //     img.classList.add('goods-list__img');
+    //     img.src = element.
+    //         goodsList.append(li);
+    // });
+
+
 };
 
 

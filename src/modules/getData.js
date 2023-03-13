@@ -17,7 +17,7 @@ export const getData = async (urlApi, param, cbError = () => { }) => {          
 
         const response = await fetch(url);                            // тк fetch асинхронная фукнция, поэтому await, иначе получаем даннеы в ввиде промиса
         const data = await response.json();                             // возвращет промис, поэтому ставим await, чтобы отдавал ответ
-        //console.log('response ', response);
+        console.log('response form getData ', data);
 
         if (!response.ok) {
             throw new Error(data.message);
@@ -37,6 +37,5 @@ export const getData = async (urlApi, param, cbError = () => { }) => {          
         else {
             cbError(err);                    // вызов коллбэка
         }
-
     }
 };
