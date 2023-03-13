@@ -11,6 +11,6 @@ export const sendOrder = async (order) => {             //  async ставим �
     });
 
     //console.log('res.json() ', res.json());
-    return res.json();          // промис , обрбатывам его при помощи  then()
+    return res.json();          // промис , обрбатывам его при помощи  then() либо черз async/await
 
 };
