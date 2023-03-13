@@ -1,7 +1,7 @@
 // отрисовка Корзины http://localhost:3000/#/cart:
 import { cart } from "../const";
 import { createElement } from "../utils/createElement";
-import { getCart } from "../controllers/cartController";
+import { cartTotalPrice, getCart } from "../controllers/cartController";
 import { getData } from "../getData";
 import { API_URL } from "../const";
 import { countController } from "../controllers/countController";
@@ -12,8 +12,9 @@ import { addProductCart } from "../controllers/cartController";
 
 
 
+
 export const renderCart = ({ render, cartGoodsStore }) => {
-    console.log('cartGoodsStore ', cartGoodsStore);
+    //console.log('cartGoodsStore ', cartGoodsStore);
 
     cart.textContent = '';             // можно было использовать и innerHTML. textContet работате чуть быстрее
 
@@ -24,7 +25,7 @@ export const renderCart = ({ render, cartGoodsStore }) => {
     const container = createElement('div',
         {
             className: 'container',
-            innerHTML: ' <h2 class="cart__title">Корзина</h2>'
+            innerHTML: '<h2 class="cart__title">Корзина</h2>'
         },
         {
             parent: cart
@@ -42,10 +43,11 @@ export const renderCart = ({ render, cartGoodsStore }) => {
     );
 
     // getCart() = [ {id, color, count, size}, {}, {} ] - Корзина
+
     getCart().forEach((cartProduct) => {
         //console.log('cartProduct ', cartProduct);
         const data = cartGoodsStore.getProduct(cartProduct.id);             //  товар {id: , category: , gender: , description:  , title: , count: , size: , price: }
-        console.log('cartGoodsStore.getProduct(cartProduct.id) ', data)
+
 
         //  console.log('cartItem ', cartItem);
         //  мой способ:
@@ -67,23 +69,14 @@ export const renderCart = ({ render, cartGoodsStore }) => {
         //                         <div class="item__prop">
         //                             <div class="item__color">
         //                                 <p class="item__subtitle item__color-title">Цвет</p>
-        //                                 <div class="item__color-item color color--${data.color} color--check"></div>
+        //                                 <div class="item__color-item color color--${cartProduct.color} color--check"></div>
         //                             </div>
 
         //                             <div class="item__size">
         //                                 <p class="item__subtitle item__size-title">Размер</p>
-        //                                 <div class="item__size-item size">${data.size}</div>
+        //                                 <div class="item__size-item size">${cartProduct.size}</div>
         //                             </div>
         //                         </div> 
-
-        //                         <button class="item__del" aria-label="Удалить товар из корзины"></button>
-
-        //                         <div class="count item__count">
-        //                             <button class="count__item count__minus">-</button>
-        //                             <span class="count__item count__number">${cartProduct.count}</span>
-        //                             <button class="count__item count__plus">+</button>
-        //                             <input type="hidden" name="count" value="1">
-        //                         </div>
         //                  </article>
         //             </li> 
         //         `;
@@ -147,6 +140,7 @@ export const renderCart = ({ render, cartGoodsStore }) => {
                         if (isRemove) {
                             li.remove();        // удаляем элемент <li></li>
                         }
+                        cartTotalPrice.update();  // обновляем итговую сумму
                     });
                 }
             }
@@ -155,9 +149,11 @@ export const renderCart = ({ render, cartGoodsStore }) => {
         const countBlock = renderCount(cartProduct.count, 'item__count', (count) => {  //  рисует кнопки +/- и число товара
             cartProduct.count = count;
             addProductCart(cartProduct, true);
+            cartTotalPrice.update();                 // обновляем итговую сумму при нажатии на кнопки +/-
         });
+
         article.append(countBlock);
-    });
+    }); // forEach
 
 
 
@@ -184,10 +180,13 @@ export const renderCart = ({ render, cartGoodsStore }) => {
     const totalPrice = createElement('p',
         {
             className: 'cart__total-price',
-            textContent: '0 руб'
         },
         {
-            parent: cartTotal
+            parent: cartTotal,
+            cb(elem) {      // elem это  totalPrice
+                cartTotalPrice.update();
+                cartTotalPrice.writeTotal(elem);  // обновляем итговую сумму
+            }
         });
 
 };
