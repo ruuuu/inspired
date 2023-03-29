@@ -24,14 +24,14 @@ const init = async () => {
         //console.log('DATA.navigation ', DATA.navigation);                      // DATA.navigation = { women: {title: , list: },    men: {title: , list: } }
         console.log('DATA.colors ', DATA.colors);                                // [ {id: 1, title: 'black', code: '#000000'},  { id: 2, title: 'white', code: '#ffffff' },  {id: 3, title: 'red', code: '#dd0808'} ]
 
-
-        createCssColors(DATA.colors);
-
+        
         // роутинг: 
         router.on('*', () => {   // навешиваем событие: если находимся на любой стрнаице, вызовется переданная  функция 
             renderHeader();
             renderFooter();
         });
+        
+        createCssColors(DATA.colors);
 
 
         // роутинг:

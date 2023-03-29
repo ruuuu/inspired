@@ -1,12 +1,12 @@
-// отрисовка формы "Оформить Заказ"
+// отрисовка модалки для оформления заказа:
 import { order } from "../const";
 import { createElement } from "../utils/createElement";
 import { getCart } from "../controllers/cartController";
 import { sendOrder } from "../controllers/orderController";
 
 
-//  верстка мод окна:
-const showOrderInfo = (data) => {  // data - обработанный ответ от сервера в виде res.json(): { id: 34242, createdAt: '12.03.2023', fio:"Alsu", address:"Test", phone:"892744351223", email:"tre@mail.ru", delivery:"self", order:[{id,color, size, count}, {}, {}] }
+//  верстка мод окна заказа:
+const showOrderInfo = (data) => {  // data - обработанный ответ от сервера в виде res.json(): { id: 34242, createdAt:'12.03.2023', fio:"Alsu", address:"Test", phone:"892744351223", email:"tre@mail.ru", delivery:"self", order:[{id, color, size, count}, {}, {}] }
     // console.log('data from server in res.json() ', data);
     const modal = createElement('div',                      // подложка под тело модалки
         {
@@ -14,9 +14,9 @@ const showOrderInfo = (data) => {  // data - обработанный ответ
         },
         {
             parent: document.body,
-            cb(el) {                        // el- созданный modal(подложка),  при нажатии на el, вызовится эта коллбэк-фукняи(модалка закрывается)
+            cb(el) {                        // el- этот созданный modal(подложка),  при нажатии на el, вызовится эта коллбэк-фукняи(модалка закрывается)
                 el.addEventListener('click', (evt) => {
-                    if (evt.target === el) {    //  если нажатый элемент(evt.target) равен modal
+                    if (evt.target === el) {    // если нажатый элемент(evt.target) равен modal
                         el.remove();            // удаление элемента el
                     }
                 });
@@ -48,23 +48,23 @@ const showOrderInfo = (data) => {  // data - обработанный ответ
           </li>
 
           
-          ${data.address && // если data.address заполнили, то рисуем верстку поля Адрес 
-        ` 
+          ${data.address && // если поле Адрес data.address заполнили, то рисуем верстку поля Адрес (как в реакте)
+            `
             <li class="customer__item">
                 <span class="customer__item-title">Адрес доставки</span>
                 <span class="customer__item-data">${data.address}</span>
             </li>
-          `
+            `
         }
     
          
           <li class="customer__item">
-            <span class="customer__item-title">Телефон</span>
-            <span class="customer__item-data">${data.phone}</span>
+               <span class="customer__item-title">Телефон</span>
+               <span class="customer__item-data">${data.phone}</span>
           </li>
     
          
-          ${data.email && //  если data.email заполнили, то рисуем верстку поля Еmail
+          ${data.email && //  если поле емейл data.email заполнили, то рисуем верстку поля Еmail (как в реакте)
         `  
             <li class="customer__item">
                 <span class="customer__item-title">E-mail</span>
@@ -79,12 +79,22 @@ const showOrderInfo = (data) => {  // data - обработанный ответ
             <span class="customer__item-data">${{
             self: 'Самовывоз',
             delivery: 'Доставка'
-        }[data.delivery]
+        }[data.delivery] // если data.delivery = self то запишется 'Самовывоз'. Если data.delivery = delivery, то запишется 'Доставка'
         }
             </span>
           </li>
         </ul>
     `
+    );
+
+
+    const goodslist = createElement('ul', 
+    {
+        className: 'modal__goods goods-list'
+    },
+    {
+        parent: modalBody
+    }
     );
 
 
@@ -150,18 +160,18 @@ export const renderOrder = ({ render }) => {
             parent: container,
             cb(form) {   // обработчик этой формы orderForm
                 form.addEventListener('submit', (evt) => {
-                    evt.preventDefault(); //  чтоб после отправки формы, страничка не перезагружалась
+                    evt.preventDefault();                           //  чтоб после отправки формы, страничка не перезагружалась
                     const formData = new FormData(form);
-                    const data = Object.fromEntries(formData);    // { fio: 'Alsy', address: 'Test', phone: '89274435612', email: 'tre@mail.ru', delivery: 'delivery' }
+                    const data = Object.fromEntries(formData);     // { fio:'Alsy', address:'Test', phone:'89274435612', email:'tre@mail.ru', delivery:'delivery' }
 
-                    data.order = getCart();  // добавили объекту свойсов order, [ {id, color, size, count}, {}, {} ] - Корзина
+                    data.order = getCart();                         // добавили объекту свойсов order, [ {id, color, size, count}, {}, {} ] - Корзина
 
                     if (data.order.length) {
-                        sendOrder(data)                             // отправка данных data  на сервер
+                        sendOrder(data)                             // отправка данных data  на сервер, вернет промис
                             .then((dataOrder) => {                  // dataOrder -ответ сервера(промис), методом then его обрабабтываем, then нужен чтобы дождаться когда данные отправяться на сервер res.json()
                                 console.log('dataOrder ', dataOrder);
-                                showOrderInfo(dataOrder);           // отобраажем модалку с инфой заказа
-                                // form.reset();                    //   очищаем форму после отправки
+                                showOrderInfo(dataOrder);           // отрисовка модалку с инфой заказа
+                                // form.reset();                    // очищаем форму после отправки
                             });
                     }
                     else {
