@@ -13,11 +13,11 @@ import { API_URL } from "../const";
 
 
 // Корзина
-const cartGoodsStore = {
+export const cartGoodsStore = {
 
-    goods: [],                              // Корзина пока пуста, будем запонялть массив в методе add ниже
+    goods: [],                              // Корзина пока пуста, будем запонялть массив в методе add() ниже
 
-    _add(product) {                         // _ знаичт испольузем внутри,  product добавяемый товар в Корзину
+    _add(product) {                         // _ знаичт испольузем внутри,  product добавляемый товар в Корзину
         if (!this.goods.some(item => item.id === product.id)) {     // если такго товара нет в Корзине. Метод вернет true, если хотя бы на одном элменет получим    т true
             this.goods.push(product);
         }
@@ -36,8 +36,8 @@ const cartGoodsStore = {
         }
     },
 
-    getProduct(id) {   //  получение товара по id  из goods (Корзины), товар = { id, price, tetule, decription, category}
-        console.log('this.goods ', this.goods);
+    getProduct(id) {   //  получение товара по id  из goods (Корзины), товар = { id, price, title, decription, category}
+        console.log('this.goods ', this.goods);  // {  category: , colors: , description: , gender: , id: , materials: ,  pic: , price: , title: , size: }  
         //console.log('this.goods.find((item) => item.id === id) ', this.goods.find((item) => item.id === id))
         return this.goods.find((item) => item.id === id);               // перебирает массив  и  возвращает первый элемент подходящий под условие
     }
@@ -46,8 +46,8 @@ const cartGoodsStore = {
 
 
 export const cartTotalPrice = {
-    elemTotalPrice: null,
-    elemCount: null,
+    elemTotalPrice: null,    // нач значние
+    elemCount: null,        // нач значние
 
     update() {   // обновление Корзины
         const cartGoods = getCart();
@@ -67,13 +67,12 @@ export const cartTotalPrice = {
             this.elemTotalPrice = elem;
             elem.textContent = `руб ${this.totalPrice}`;
         }
-
     }
 };
 
 
 // либо такая запись:
-//export const getCart = () => JSON.parse(localStorage.getItem('cart') || '[]');            // достаем из локалсторидж по ключу cart, JSON.parse() превращает  из строки в массив: [ id, id ]
+//export const getCart = () => JSON.parse(localStorage.getItem('cart') || '[]');            // достаем из локалсторидж по ключу 'cart', JSON.parse() превращает  из строки в массив: [ id, id ]
 
 
 // либо с return:
@@ -127,6 +126,14 @@ export const removeCart = (productCart) => {
 
     return true;
 };
+
+
+
+//  очищение Корзины:
+export const clearCart = () => {
+    localStorage.removeItem('cart');  // очищение локаслсториджа
+};
+
 
 
 
